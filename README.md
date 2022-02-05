@@ -1,4 +1,7 @@
 # cen4010-group10
 
-# Notifire template of the setup
+# 
 # Create a folder of your feature name 
+# navigate to group10 folder > add feature folder 
+# Django-admin startapp <feature name>
+  
