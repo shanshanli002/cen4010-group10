@@ -1,4 +1,7 @@
 # cen4010-group10
 
-# Notifire template of the setup
-# Created a folder of memeber feature (you can update the name for easy use)
+
+ Create a folder of your feature name 
+ navigate to group10 folder > add feature folder 
+ Django-admin startapp <feature name>
+  
