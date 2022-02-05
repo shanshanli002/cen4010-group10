@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from profileManage import views
+from firebase_admin import firestore, initialize_app
 
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('bookDetails/', include('bookDetails.urls')),
     path('bookRating/', include('bookRating.urls')),
     path('profileManage/', include('profileManage.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
 ]

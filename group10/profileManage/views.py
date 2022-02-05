@@ -1,6 +1,34 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+import pyrebase
+# Create your views here.
 
+config = {
+  "apiKey": "AIzaSyDY6UV8OBpaUuKdsUPdtvNwUxfZKPl4nMw",
+  "authDomain": "profile-management-473b0.firebaseapp.com",
+  "databaseURL": "https://profile-management-473b0-default-rtdb.firebaseio.com",
+  "projectId": "profile-management-473b0",
+  "storageBucket": "profile-management-473b0.appspot.com",
+  "messagingSenderId": "64112140710",
+  "appId": "1:64112140710:web:9ca806a20c3f34fc0aaf67",
+  "measurementId": "G-JRMV1QMYTR"
+}
+
+#here we are doing firebase authentication
+firebase=pyrebase.initialize_app(config)
+authe = firebase.auth()
+database=firebase.database()
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-# Create your views here.
+    #accessing our firebase data and storing it in a variable
+    email = database.child('profile-management-473b0-default-rtdb').child('email').get().val()
+    phone = database.child('profile-management-473b0-default-rtdb').child('phone').get().val()
+    userName = database.child('profile-management-473b0-default-rtdb').child('userName').get().val()
+
+
+    context = {
+        'email':email,
+        'phone':phone,
+        'userName':userName
+    }
+
+    return render(request, 'index.html', context)

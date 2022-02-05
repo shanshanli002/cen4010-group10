@@ -1,4 +1,4 @@
 # cen4010-group10
 
 # Notifire template of the setup
-# Create a folder of your feature name 
+# Created a folder of memeber feature (you can update the name for easy use)
