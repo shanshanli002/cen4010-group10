@@ -20,9 +20,9 @@ database=firebase.database()
 
 def index(request):
     #accessing our firebase data and storing it in a variable
-    email = database.child('profile-management-473b0-default-rtdb').child('email').get().val()
-    phone = database.child('profile-management-473b0-default-rtdb').child('phone').get().val()
-    userName = database.child('profile-management-473b0-default-rtdb').child('userName').get().val()
+    email = database.child('data').child('email').get().val()
+    phone = database.child('data').child('phone').get().val()
+    userName = database.child('data').child('username').get().val()
 
 
     context = {
