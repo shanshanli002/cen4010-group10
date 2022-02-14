@@ -23,23 +23,24 @@ config = {
   "measurementId": "G-JRMV1QMYTR"
 }
 
-#here we are doing firebase authentication
-firebase=pyrebase.initialize_app(config)
+# here we are doing firebase authentication
+firebase = pyrebase.initialize_app(config)
 authe = firebase.auth()
-database=firebase.database()
+database = firebase.database()
 
-#def index(request):
-    #accessing our firebase data and storing it in a variable
-    #email = database.child('data').child('email').get().val()
-    #phone = database.child('data').child('phone').get().val()
-    #userName = database.child('data').child('username').get().val()
+# def index(request):
+    # accessing our firebase data and storing it in a variable
+    # email = database.child('data').child('email').get().val()
+    # phone = database.child('data').child('phone').get().val()
+    # userName = database.child('data').child('username').get().val()
 
-
-    #context = {
+    # context = {
        # 'email':email,
-        #'phone':phone,
+        # 'phone':phone,
        # 'userName':userName
-    #}
+    # }
+
+
 def registerPage(request):
     	  if request.user.is_authenticated:
 		            return redirect('home')
@@ -57,3 +58,27 @@ def registerPage(request):
 
 		              context = {'form':form}
 		              return render(request, 'templates/register.html', context)
+
+
+def loginPage(request):
+    	  if request.user.is_authenticated:
+		            return redirect('home')
+	      else:
+		            if request.method == 'POST':
+			                  username = request.POST.get('username')
+			                  password =request.POST.get('password')
+
+			                  user = authenticate(request, username=username, password=password)
+
+			                  if user is not None:
+				                        login(request, user)
+				                        return redirect('home')
+			                  else:
+				                        messages.info(request, 'Username OR password is incorrect')
+
+		              context = {}
+		              return render(request, 'templates/login.html', context)
+
+def logoutUser(request):
+	      logout(request)
+	      return redirect('login')
