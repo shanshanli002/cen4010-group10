@@ -3,10 +3,12 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-
+from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django import template
 from .models import *
+from .models import Customer
 from .forms import OrderForm, CreateUserForm
 from .filters import OrderFilter
 import pyrebase
