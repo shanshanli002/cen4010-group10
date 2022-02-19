@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from django.contrib.auth import login,logout,authenticate
+from rest_framework import viewsets
+from .serializers import BookSerializer, CustomerSerializer, CartSerializer
 from .forms import *
 
 # Create your views here.
