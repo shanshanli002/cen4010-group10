@@ -11,7 +11,7 @@ from .models import *
     
 
     
-admin.site.register(Book)
-admin.site.register(Customer)
-admin.site.register(Cart)
+#admin.site.register(Book)
+#admin.site.register(Customer)
+#admin.site.register(Cart)
 
