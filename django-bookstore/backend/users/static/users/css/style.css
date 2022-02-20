@@ -316,8 +316,7 @@ width: 100%;
 .thumbnail__links a {
 font-size: 1rem;
 color: #fff;
-&:focus,
-&:hover {color: rgba(255,255,255,.5);}
+
 }
 .signup__form {
 padding: 2.5rem;
@@ -334,7 +333,7 @@ border-top: 0;
 border-right: 0;
 border-left: 0;
 border-radius: 0;
-&:focus {border-color: #111;}
+
 }
 [type="text"] {color: #111;}
 [type="password"] {color: #111;}
