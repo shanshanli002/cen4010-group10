@@ -42,11 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'rest_framework',
-    'profileManage',
-    'Customer',
-    'Tag',
-    'Product',
-    'Order',
+    'UserAuth',
 ]
 
 MIDDLEWARE = [
