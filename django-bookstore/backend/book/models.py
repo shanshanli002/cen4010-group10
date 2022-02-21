@@ -15,8 +15,3 @@ class Book(models.Model):
     def __str__(self):
         return str(self.title)
     
-    class Sorting(models.Model):
-    topSeller=models.CharField(max_length=200,null=True)
-    rating=models.CharField(max_length=200,null=True)
-    genre=models.CharField(max_length=200,null=True)
-    X=models.IntegerField()
