@@ -20,7 +20,14 @@ class Book(models.Model):
     def __str__(self):
         return str(self.Title)
     
-
+class Author(models.Model):
+    First_Name = models.CharField(max_length=200,null=True)
+    Last_Name = models.CharField(max_length=200,null=True)
+    Bio = models.CharField(max_length=10000,null=True)
+    Publisher = models.CharField(max_length=200,null=True)
+    
+    def __str__(self):
+        return str(self.First_Name)
 
   
 
