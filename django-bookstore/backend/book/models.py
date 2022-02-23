@@ -7,9 +7,9 @@ from django.db import models
 
 # Create your models here.
 class Book(models.Model):
-    Title=models.CharField(max_length=200,null=True)
-    Author=models.CharField(max_length=200,null=True)
-    Price=models.FloatField()
+    Title = models.CharField(max_length=200,null=True)
+    Author = models.CharField(max_length=200,null=True)
+    Price = models.FloatField()
     Book_Description = models.CharField(max_length=10000,null=True)
     Genre = models.CharField(max_length=200,null=True)
     Publisher = models.CharField(max_length=200,null=True)
