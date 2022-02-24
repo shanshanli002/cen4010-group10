@@ -7,13 +7,18 @@
     <title>ISBN Search</title>
 </head>
 <body>
-    <h1>Enter ISBN To Look Up Book</h1>
+    <h1>Enter ISBN To View Book Details</h1>
      <input type="text" placeholder="ISBN Number Without Dashes">
     <button type="submit">Search</button>
     <h2>List of All Books</h2>
     {% for i in all_books %}
-        {{i.Title}}
+       <div>{{i.Title}} <span id = "isbn">{{i.ISBN}}</span>
+       </div> 
         <br>
     {% endfor %}
+
+    <style>
+        #isbn{ color:rgb(119, 119, 20); margin-left: 20px;}
+    </style>
 </body>
 </html>
