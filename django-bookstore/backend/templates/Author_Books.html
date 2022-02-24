@@ -12,10 +12,13 @@
     <button type="submit">Search</button>
     <br>
     <h2>List Of All Authors</h2>
-    <br>
     {% for i in all_authors %}
+        <h3> 
+            {{i.First_Name}}
+            {{i.Last_Name}}
+        </h3>
+            {{i.Bio}}
         <br>
-        {{i.First_Name}}
     {% endfor %}
 
 </body>
