@@ -9,6 +9,14 @@
 <body>
     <h1>Enter Author's First Name To Look Up Book</h1>
      <input type="text" placeholder="J. K. Rowling">
-<button type="submit">Search</button>
+    <button type="submit">Search</button>
+    <br>
+    <h2>List Of All Authors</h2>
+    <br>
+    {% for i in all_authors %}
+        <br>
+        {{i.First_Name}}
+    {% endfor %}
+
 </body>
 </html>

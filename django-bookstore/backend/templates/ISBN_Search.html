@@ -9,6 +9,10 @@
 <body>
     <h1>Enter ISBN To Look Up Book</h1>
      <input type="text" placeholder="ISBN Number Without Dashes">
-<button type="submit">Search</button>
+    <button type="submit">Search</button>
+    {% for i in all_books %}
+        <br>
+        {{i.Title}}
+    {% endfor %}
 </body>
 </html>
