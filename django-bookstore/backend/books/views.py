@@ -15,3 +15,6 @@ def Author_Books(request):
     """client view to search for books associated with a specific author do not need model"""
     authors = Author.objects.all()
     return render(request, "Author_Books.html", {'all_authors': authors}) 
+
+def homepage(request):
+    return HttpResponse('Welcome to Bookstore')
