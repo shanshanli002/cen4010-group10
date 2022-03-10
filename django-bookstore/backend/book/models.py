@@ -18,6 +18,7 @@ class Book(models.Model):
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
     
@@ -31,3 +32,6 @@ class Book(models.Model):
 =======
     
 >>>>>>> parent of 9d45d09 (Edited models.py)
+=======
+    
+>>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
