@@ -14,4 +14,8 @@ class Book(models.Model):
  
     def __str__(self):
         return str(self.title)
+<<<<<<< HEAD
     
+=======
+    
+>>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
