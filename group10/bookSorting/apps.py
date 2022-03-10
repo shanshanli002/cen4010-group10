@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class BooksortingConfig(AppConfig):
-    name = 'bookSorting'
+class BookdetailsConfig(AppConfig):
+    name = 'bookDetails'
