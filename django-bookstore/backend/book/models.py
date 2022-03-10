@@ -16,7 +16,11 @@ class Book(models.Model):
         return str(self.title)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     
+=======
+    
+>>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
 =======
     
 >>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
