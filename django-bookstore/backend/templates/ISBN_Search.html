@@ -11,8 +11,8 @@
      <input type="text" placeholder="ISBN No Dashes">
     <button type="submit">Search</button>
     <h2>List of All Books</h2>
-    {% for i in all_books %}
-       <div>{{i.Title}} <span id = "isbn">{{i.ISBN}}</span>
+    {% for book in books %}
+       <div>{{book.Title}} <span id = "isbn">{{book.ISBN}}</span>
        </div> 
         <br>
     {% endfor %}
