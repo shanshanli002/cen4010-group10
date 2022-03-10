@@ -14,24 +14,3 @@ class Book(models.Model):
  
     def __str__(self):
         return str(self.title)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-=======
-    
->>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
-=======
-    
->>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
-=======
-    
->>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
-=======
-    
->>>>>>> parent of 9d45d09 (Edited models.py)
-=======
-    
->>>>>>> parent of 1662163 (Merge pull request #4 from shanshanli002/bookSorting)
