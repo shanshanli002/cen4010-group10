@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-
 from django.db import models
 
 
@@ -21,10 +19,10 @@ class Book(models.Model):
         return str(self)
     
 class Author(models.Model):
-    First_Name = models.CharField(max_length=200,null=True)
-    Last_Name = models.CharField(max_length=200,null=True)
-    Bio = models.CharField(max_length=10000,null=True)
-    Publisher = models.CharField(max_length=200,null=True)
+    First_Name = models.CharField(max_length=200)
+    Last_Name = models.CharField(max_length=200)
+    Bio = models.CharField(max_length=10000)
+    Publisher = models.CharField(max_length=200)
     
     def __str__(self):
         return str(self)

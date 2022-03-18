@@ -23,7 +23,8 @@ urlpatterns = [
     path('', views.homepage),
     path('admin/', admin.site.urls),
     path('allbooks/', views.ISBN_Search),
-    path('authors/', views.Author_Books),
+    path('allauthors/', views.Author_Books),
     #api views
-    path('books/', views.book_list)
+    path('books/', views.book_list),
+    path('authors/', views.author_list)
 ]
