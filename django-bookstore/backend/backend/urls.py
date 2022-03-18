@@ -27,5 +27,6 @@ urlpatterns = [
     #api views
     path('books/', views.book_list),
     path('authors/', views.author_list),
-    path('book/<int:ISBN>/', views.book_detail)
+    path('books/<int:ISBN>/', views.book_detail),
+    path('books/<str:First_Name>/<str:Last_Name>/', views.author_books)
 ]

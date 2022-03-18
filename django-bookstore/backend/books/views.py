@@ -72,3 +72,16 @@ def author_list(request):
             return JsonResponse(serializer.data, status = 201)
 
         return JsonResponse(serializer.errors, status = 400)
+
+@csrf_exempt
+def author_books(request, First_Name, Last_Name):
+    try:
+        author = Author.objects.get(First_Name = First_Name)
+        author = Author.objects.get(Last_Name = Last_Name)
+    except Author.DoesNotExist:
+        return HttpResponse(status = 404)
+
+    if request.method == 'GET':
+      Book.objects.filter(Author = f'{author.First_Name} {author.Last_Name}')
+      serializer = BookSerializer(Book.objects.filter(Author = f'{author.First_Name} {author.Last_Name}'), many=True)
+      return JsonResponse(serializer.data, safe=False)
