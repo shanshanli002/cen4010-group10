@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
+from django.http import HttpResponse, JsonResponse
+from rest_framework.parsers import JSONParser
+from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm
 from django.contrib import messages
