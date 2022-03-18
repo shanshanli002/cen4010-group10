@@ -19,8 +19,11 @@ from django.urls import include
 from books import views
 
 urlpatterns = [
+    #regular views for the django app
     path('', views.homepage),
     path('admin/', admin.site.urls),
-    path('books/', views.ISBN_Search),
+    path('allbooks/', views.ISBN_Search),
     path('authors/', views.Author_Books),
+    #api views
+    path('books/', views.book_list)
 ]
