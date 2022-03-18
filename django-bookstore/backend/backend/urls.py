@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from books import views
-
+from books.views import *
 urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
@@ -26,5 +26,6 @@ urlpatterns = [
     path('allauthors/', views.Author_Books),
     #api views
     path('books/', views.book_list),
-    path('authors/', views.author_list)
+    path('authors/', views.author_list),
+    path('book/<int:ISBN>/', views.book_detail)
 ]

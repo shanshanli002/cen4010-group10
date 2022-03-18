@@ -1,3 +1,4 @@
+from curses.ascii import HT
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
@@ -38,7 +39,23 @@ def book_list(request):
             return JsonResponse(serializer.data, status=201)
         
         return JsonResponse(serializer.errors, status=400)
-        
+
+@csrf_exempt
+def book_detail(request, ISBN):
+    try:
+        book = Book.objects.get(ISBN= ISBN)
+
+    except Book.DoesNotExist:
+        return HttpResponse(status = 404)
+
+    if request.method == 'GET':
+        serializer = BookSerializer(book)
+        return JsonResponse(serializer.data)
+    
+    elif request.method == 'DELETE':
+        book.delete()
+        return HttpResponse(status=204)
+
 @csrf_exempt
 def author_list(request):
     if request.method == 'GET':

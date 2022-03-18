@@ -7,7 +7,7 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = ['Title', 'Author', 'Price', 'Book_Description', 'Genre', 'Publisher', 'Year_Published', 'Copies_Sold', 'ISBN']
     
-#condensed serializer compared to serializers.serializers
+#condensed serializer compared to serializers.serializers, don't have to explicitly list all fields details, create, or update methods
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
