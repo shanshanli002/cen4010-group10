@@ -43,7 +43,7 @@ def book_list(request):
 @csrf_exempt
 def book_detail(request, ISBN):
     try:
-        book = Book.objects.get(ISBN= ISBN)
+        book = Book.objects.get(ISBN = ISBN)
 
     except Book.DoesNotExist:
         return HttpResponse(status = 404)
@@ -53,7 +53,7 @@ def book_detail(request, ISBN):
         return JsonResponse(serializer.data)
     
     elif request.method == 'DELETE':
-        book.delete()
+        Book.objects.filter(ISBN = ISBN).delete()
         return HttpResponse(status=204)
 
 @csrf_exempt
