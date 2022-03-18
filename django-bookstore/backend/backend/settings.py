@@ -42,15 +42,15 @@ INSTALLED_APPS = [
     'knox',
 
     # own
-    'users.apps.UsersConfig',
-    'crispy_forms',
+    #'users.apps.UsersConfig',
+    #'crispy_forms',
 ]
 
 #Knox’s TokenAuthentication your default authentification class for django-rest-framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+         'rest_framework.authentication.SessionAuthentication',
         'knox.auth.TokenAuthentication',
     ]
 }
