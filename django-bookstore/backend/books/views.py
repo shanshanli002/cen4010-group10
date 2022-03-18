@@ -22,6 +22,7 @@ def Author_Books(request):
 
 def homepage(request):
     return HttpResponse('Welcome to Bookstore')
+
 #csrf allows for post without auth
 @csrf_exempt
 def book_list(request):
