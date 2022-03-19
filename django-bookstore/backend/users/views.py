@@ -8,6 +8,7 @@ from django.contrib.auth import login
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
+
 #from django.contrib.auth.forms import UserCreationForm
 #from .forms import UserRegisterForm
 #from django.contrib import messages
@@ -60,4 +61,5 @@ class LoginAPI(KnoxLoginView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
-        return super(LoginAPI,self).post(requset, format=None)
+        return super(LoginAPI,self).post(request, format=None)
+    
