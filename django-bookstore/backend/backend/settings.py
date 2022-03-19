@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'knox',
+    'users'
 
     # own
     #'users.apps.UsersConfig',
@@ -53,7 +54,7 @@ REST_FRAMEWORK = {
          'rest_framework.authentication.SessionAuthentication',
         'knox.auth.TokenAuthentication',
     ]
-}
+ }
 
 
 MIDDLEWARE = [
