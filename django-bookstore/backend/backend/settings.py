@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     #'knox',
     'users',
-    'payment'
+    'payment',
 
     #'users.apps.UsersConfig',
     #'crispy_forms',

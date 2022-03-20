@@ -1,5 +1,6 @@
 from django.db import models
-from creditcard.models import CardNumberField, CardExpiryField, SecurityCodeField
+
+#from creditcard.models import CardNumberField, CardExpiryField, SecurityCodeField
 
 from django.core import validators
 #import stripe 
@@ -15,7 +16,7 @@ class CreditCard(models.Model):
     def __str__(self):
         return str(self.creditcard)
     
-'''
+
 class CreditCard(models.Model):
     cc_number = CardNumberField(_('card number'))
     cc_expiry = CardExpiryField(_('expiration date'))
@@ -25,6 +26,7 @@ class CreditCard(models.Model):
     def __str__(self):
         return str(self.creditcard)
   
+ '''
  
 class Product(models.Model):
     id = models.BigAutoField(primary_key=True)
