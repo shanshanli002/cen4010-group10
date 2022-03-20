@@ -3,8 +3,8 @@ from .models import *
 
 # model for credit card admin
 
-class CreditCardAdmin(admin.ModelAdmin):
-    list_display=('id','cc_number','cc_expiry','cc_code','username')
+class PaymentAdmin(admin.ModelAdmin):
+    list_display=('id','creditcard_number','creditcard_expiration','creditcard_code','username')
  
  
-admin.site.register(CreditCard,CreditCardAdmin)
+admin.site.register(Payment,PaymentAdmin)

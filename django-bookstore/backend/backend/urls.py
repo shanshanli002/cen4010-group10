@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from users import views
-#from payment import views
-#from payment.views import *
+from payment import views
+from payment.views import *
 from users.views import *
 
 
@@ -27,7 +27,7 @@ urlpatterns = [
     #api view
     path('users/<str:username>/',views.User_Detail),
     path('users/', views.put),
-    path('creditcard/',views.List_All_CreditCard),
+    path('payment/',views.List_All_Payment),
     #path('payment/', include('payment.urls')),
     #path('creditcard/',views.test_payment),
    

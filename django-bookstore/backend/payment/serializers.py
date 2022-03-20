@@ -1,10 +1,9 @@
 from rest_framework import serializers
-from .models import *
+from .models import Payment
 
-class CreditCard(serializers.ModelSerializer):
+class Payment(serializers.ModelSerializer):
     class Meta:
-        model = CreditCard
-        fields = ('id','cc_number','cc_expiry','cc_code','username')
+        model = Payment
+        fields = ['id','creditcard_number','creditcard_expiration','creditcard_code','username']
         
-    return CreditCard
     
