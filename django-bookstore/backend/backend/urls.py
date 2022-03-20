@@ -27,7 +27,7 @@ urlpatterns = [
     #api view
     path('users/<str:username>/',views.User_Detail),
     path('users/', views.put),
-    path('', include('payments.urls')),
+    path('payment/', include('payment.urls')),
     #path('creditcard/',views.test_payment),
    
     
