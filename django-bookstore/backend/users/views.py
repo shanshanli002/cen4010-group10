@@ -6,6 +6,9 @@ from .models import Users
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
+#from knox.models import AuthToken
+
+
 
 #from django.contrib.auth.forms import UserCreationForm
 #from .forms import UserRegisterForm
@@ -37,18 +40,28 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 #register API
-#class RegisterAPI(generics.GenericAPIView):
-#    serializer_class = UserSerializer
+'''
+class RegisterAPI(generics.GenericAPIView):
+    serializer_class = UserSerializer
     
-#    def post(self, request, *args, **kwargs):
-#        serializer = self.get_serializer(data=request.data)
-#        serializer.is_valid(raise_exception=True)
-#        user = serializer.save()
-#        return Response({
-#        "user": UserSerializer(user, context=self.get_serializer_context()).data,
-#        "token": AuthToken.objects.create(user)[1]
-#        })
-
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        
+        if request.method == 'GET':
+            serializer = UserSerializer(users, many = True)
+            return JsonResponse(serializer.data, status = 200, safe=False)
+        elif request.method == 'POST':
+            data = JSONParser().parse(request)
+            serializer = UserSerializer(data=data)
+       
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=201)
+        
+            return JsonResponse(serializer.errors, status=400)
+'''
 
 #accounts API
 #class LoginAPI(KnoxLoginView):
