@@ -10,7 +10,6 @@ class Payment(models.Model):
     creditcard_number = models.CharField(max_length = 16) 
     creditcard_expiration = models.CharField(max_length =4)  
     credictcard_code = models.CharField(max_length=3)
-    username = models.CharField(max_length = 100)
     
     def __str__(self):
         return str(self.payment)
