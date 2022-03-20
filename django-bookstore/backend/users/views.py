@@ -1,13 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 from rest_framework import generics, permissions
 from rest_framework.response import Response
-#from knox.models import AuthToken
 from .serializers import UserSerializer
 from .models import Users
-#from django.contrib.auth import login
-#from rest_framework import permissions
-#from rest_framework.authtoken.serializers import AuthTokenSerializer
-#from knox.views import LoginView as KnoxLoginVie
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
@@ -66,7 +61,7 @@ from django.views.decorators.csrf import csrf_exempt
 #        login(request, user)
 #        return super(LoginAPI,self).post(request, format=None)
 
-#csrf allows for post without auth
+
 @csrf_exempt
 def List_All_Users(request):
     users = Users.objects.all()
@@ -74,3 +69,13 @@ def List_All_Users(request):
     if request.method == 'GET':
         serializer = UserSerializer(users, many = True)
         return JsonResponse(serializer.data, status = 200, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(data=data)
+       
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        
+        return JsonResponse(serializer.errors, status=400)
+
