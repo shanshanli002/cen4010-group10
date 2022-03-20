@@ -21,10 +21,11 @@ from users.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', include('users.urls')),
     path('users/',views.List_All_Users),
+    #api view
+    path('users/<str:username>/',views.User_Detail),
+    path('users/', views.put),
    
-    #path('api/login/',include('users.urls')),
     
-    #path('payments/', include('payments.urls'))
+    #path('creditcard/', views.test_payment),
 ]

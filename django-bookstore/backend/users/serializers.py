@@ -5,7 +5,6 @@ from .models import *
 
 
 #user serializer
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -17,3 +16,4 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
+    
