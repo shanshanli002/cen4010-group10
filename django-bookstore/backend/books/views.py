@@ -94,9 +94,9 @@ def author_books(request, First_Name, Last_Name):
 class Author_Books (generics.ListAPIView):
     serializer = BookSerializer
 
-    def get_query(self):
+    def get_queryset(self):
         bookset = Book.objects.all()
-        name = self.request.query_params.get('Author')
+        name = self.request.QUERY_PARAMS.get('Author',None)
         if name is not None:
             bookset = bookset.filter(Author=name)
         return bookset

@@ -28,6 +28,7 @@ urlpatterns = [
     path('books/', views.book_list),
     path('authors/', views.author_list),
     path('books/<int:ISBN>/', views.book_detail),
-    path('books/<str:First_Name>/<str:Last_Name>/', views.author_books),
-    path('books?Author=YannMartel', Author_Books.get_query)
+    path('books/<str:First_Name> <str:Last_Name>/', views.author_books),
+    path('books?Author=', Author_Books.get_queryset)
 ]
+#try to link the tables so you can query by author id
