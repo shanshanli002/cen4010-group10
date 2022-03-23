@@ -28,5 +28,6 @@ urlpatterns = [
     path('books/', views.book_list),
     path('authors/', views.author_list),
     path('books/<int:ISBN>/', views.book_detail),
-    path('books/<str:First_Name>/<str:Last_Name>/', views.author_books)
+    path('books/<str:First_Name>/<str:Last_Name>/', views.author_books),
+    path('books?Author=YannMartel', Author_Books.get_query)
 ]

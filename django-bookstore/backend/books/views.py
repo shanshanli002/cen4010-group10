@@ -6,6 +6,8 @@ from .models import *
 from .serializers import BookSerializer
 from .serializers import AuthorSerializer
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics
+
 
 # these are regular django views
 def ISBN_Search(request):
@@ -74,7 +76,7 @@ def author_list(request):
 
         return JsonResponse(serializer.errors, status = 400)
 
-"""@csrf_exempt
+@csrf_exempt
 def author_books(request, First_Name, Last_Name):
     try:
         author = Author.objects.get(First_Name = First_Name)
@@ -87,4 +89,14 @@ def author_books(request, First_Name, Last_Name):
       serializer = BookSerializer(Book.objects.filter(Author = f'{author.First_Name} {author.Last_Name}'), many=True)
       return JsonResponse(serializer.data, safe=False)
 
-"""
+
+@csrf_exempt
+class Author_Books (generics.ListAPIView):
+    serializer = BookSerializer
+
+    def get_query(self):
+        bookset = Book.objects.all()
+        name = self.request.query_params.get('Author')
+        if name is not None:
+            bookset = bookset.filter(Author=name)
+        return bookset
