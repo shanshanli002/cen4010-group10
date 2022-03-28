@@ -10,18 +10,18 @@ from rest_framework import generics
 
 
 # these are regular django views
-def ISBN_Search(request):
+def all_books(request):
     """client view to search for book to view book details do not need model"""
    #without template ------     return HttpResponse("<h1> Hello World </h1>")
     # var books = use name of model to retrieve from DB
     books = Book.objects.all()
     return render (request, "ISBN_Search.html", {'books': books})
 
-def Author_Books(request):
+def all_authors(request):
     """client view to search for books associated with a specific author do not need model"""
     authors = Author.objects.all()
     return render(request, "Author_Books.html", {'authors': authors}) 
-
+#view for launching django app's home page
 def homepage(request):
     return HttpResponse('Welcome to Bookstore')
 
@@ -73,30 +73,5 @@ def author_list(request):
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status = 201)
-
+        
         return JsonResponse(serializer.errors, status = 400)
-
-@csrf_exempt
-def author_books(request, First_Name, Last_Name):
-    try:
-        author = Author.objects.get(First_Name = First_Name)
-        author = Author.objects.get(Last_Name = Last_Name)
-    except Author.DoesNotExist:
-        return HttpResponse(status = 404)
-
-    if request.method == 'GET':
-      Book.objects.filter(Author = f'{author.First_Name} {author.Last_Name}')
-      serializer = BookSerializer(Book.objects.filter(Author = f'{author.First_Name} {author.Last_Name}'), many=True)
-      return JsonResponse(serializer.data, safe=False)
-
-
-@csrf_exempt
-class Author_Books (generics.ListAPIView):
-    serializer = BookSerializer
-
-    def get_queryset(self):
-        bookset = Book.objects.all()
-        name = self.request.QUERY_PARAMS.get('Author',None)
-        if name is not None:
-            bookset = bookset.filter(Author=name)
-        return bookset

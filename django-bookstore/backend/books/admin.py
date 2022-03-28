@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 
 class BooksAdmin(admin.ModelAdmin):
-    #display for admin/book/book/
+    #display for admin/books/book/
     list_display =('ISBN','Title','Author','Genre','Book_Description','Price','Publisher','Year_Published','Copies_Sold')
     
 class AuthorAdmin(admin.ModelAdmin):

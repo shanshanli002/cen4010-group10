@@ -22,13 +22,11 @@ urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
     path('admin/', admin.site.urls),
-    path('allbooks/', views.ISBN_Search),
-    path('allauthors/', views.Author_Books),
+    path('allbooks/', views.all_books),
+    path('allauthors/', views.all_authors),
     #api views
     path('books/', views.book_list),
     path('authors/', views.author_list),
-    path('books/<int:ISBN>/', views.book_detail),
-    path('books/<str:First_Name> <str:Last_Name>/', views.author_books),
-    path('books?Author=', Author_Books.get_queryset)
+    path('books/<int:ISBN>/', views.book_detail)
 ]
 #try to link the tables so you can query by author id
