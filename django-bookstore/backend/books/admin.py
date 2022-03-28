@@ -3,8 +3,12 @@ from .models import *
 
 # Register your models here.
 
-class BookAdmin(admin.ModelAdmin):
-    list_display =('title','Author', 'Price', 'Edition')
+class BooksAdmin(admin.ModelAdmin):
+    #display for admin/books/book/
+    list_display =('ISBN','Title','Author','Genre','Book_Description','Price','Publisher','Year_Published','Copies_Sold')
     
-    
-admin.site.register(Book, BookAdmin)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('First_Name', 'Last_Name', 'Bio', 'Publisher')    
+
+admin.site.register(Book, BooksAdmin)
+admin.site.register(Author, AuthorAdmin)
