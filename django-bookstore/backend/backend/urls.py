@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('allbooks/', views.all_books),
     path('allauthors/', views.all_authors),
-    #api views
+    #api views for requests
     path('books/', views.book_list),
     path('authors/', views.author_list),
     path('books/<int:ISBN>/', views.book_detail)
