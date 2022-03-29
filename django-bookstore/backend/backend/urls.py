@@ -1,7 +1,7 @@
-"""backend URL Configuration
+"""authsysproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,14 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from users.views import *
+from users import views
 from django.urls import path
 from django.urls import include
 from books import views
 from books.views import *
+
 urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
     path('admin/', admin.site.urls),
+    path('users/',views.List_All_Users),
+    
     path('allbooks/', views.all_books),
     path('allauthors/', views.all_authors),
     #api views for requests get and post 
