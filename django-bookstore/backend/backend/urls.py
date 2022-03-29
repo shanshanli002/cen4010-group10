@@ -17,17 +17,16 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from books import views
-from books.views import *
+from books.views import all_books, all_authors, book_list, author_list, book_detail
 urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
     path('admin/', admin.site.urls),
-    path('allbooks/', views.all_books),
-    path('allauthors/', views.all_authors),
-    #api views for requests get and post 
-    path('books/', views.book_list),
-    path('authors/', views.author_list),
-    path('books/<int:ISBN>/', views.book_detail),
-    path('books/<str:First_Name> <str:Last_Name>/', views.author_books),
-    path('books?Author=', Author_Books.get_queryset)
+    #regular django views for book details 
+    path('allbooks/', all_books),
+    path('allauthors/', all_authors),
+    #api views for book details
+    path('books/', book_list),
+    path('authors/', author_list),
+    path('books/<int:ISBN>/', book_detail)
 ]
