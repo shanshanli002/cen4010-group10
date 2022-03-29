@@ -30,9 +30,6 @@ urlpatterns = [
     path('', views.homepage),
     path('admin/', admin.site.urls),
     path('users/',views.List_All_Users),
-    #path('usersDetail/<str:username>/',views.User_Detail),
-    #path('users/',views.Update_User),
-    #path('users/',views.Delete_User),
     
     path('allbooks/', views.all_books),
     path('allauthors/', views.all_authors),
