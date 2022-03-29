@@ -8,8 +8,12 @@ class UserAdmin(admin.ModelAdmin):
     #display for admin/users/accounts
     list_display=('id','username','password','first_name','email')
     
+'''
+# model for credit card admin 
+class CardAdmin(admin.ModelAdmin):
+    #display for admin/users/accounts
+    list_display=('id','first_name','creditCard_number','creditCard_expiration','creditCard_code')
+'''
 
-
-    
-    
 admin.site.register(Users,UserAdmin)
+#admin.site.register(Card,CardAdmin)

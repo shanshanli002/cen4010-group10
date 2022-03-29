@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from .serializers import UserSerializer
 from .models import Users
 from django.http import HttpResponse, JsonResponse
@@ -42,7 +43,6 @@ from django.views.decorators.csrf import csrf_exempt
 #def profile(request):
     #return render(request, 'users/profile.html')
 
-
 #list all users 
 @csrf_exempt
 def List_All_Users(request):
@@ -61,12 +61,12 @@ def List_All_Users(request):
         
         return JsonResponse(serializer.errors, status=400)
     
-  
+
 @csrf_exempt 
 #retrieve user information  
 def User_Detail(request, username):
     try:
-        username = Users.objects.get(username=username)
+        users = Users.objects.all()
 
     except Users.DoesNotExist:
         raise Http404
@@ -81,15 +81,15 @@ def User_Detail(request, username):
 #update user information
 @api_view(["PUT"])
 @csrf_exempt
-def put(self, request, username, first_name):
+def Update_User(self, request):
     try:
-        users = Users.objects.filter(username=users, first_name=first_name)
+        users = Users.objects.filter(username=users)
       
         users.update(**payload)
         users = Users.objects.get(username=username)
         users = Users.objects.get(first_name=first_name)
         serializer = UsersSerializer(users)
-        return JsonResponse({'users': serializer.data}, safe=False, status=200)
+        return JsonResponse(serializer.data, safe=False, status=200)
     
     except ObjectDoesNotExist as e:
         return JsonResponse({'error': str(e)}, safe=False, status=400)
@@ -97,6 +97,12 @@ def put(self, request, username, first_name):
         return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=500)
      
      
+def Delete_User(self, request, pk, format=None):
+    user = self.get_object(pk)
+    user.delete()
+    return Response(status=204)
+    
+    
 '''
 def Update_Users(request, username, first_name):
     users = request.users.id
