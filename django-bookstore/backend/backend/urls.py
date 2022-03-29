@@ -28,5 +28,7 @@ urlpatterns = [
     #api views for book details
     path('books/', book_list),
     path('authors/', author_list),
-    path('books/<int:ISBN>/', book_detail)
+    path('books/<int:ISBN>/', book_detail),
+    path('books/<str:First_Name> <str:Last_Name>/', views.author_books),
+    path('books?Author=', Author_Books.get_queryset)
 ]
