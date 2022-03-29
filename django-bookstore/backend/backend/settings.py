@@ -42,12 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    #'knox',
     'users',
-    #'payment',
-
-    #'users.apps.UsersConfig',
-    #'crispy_forms',
     'books',
     'rest_framework'
 ]
