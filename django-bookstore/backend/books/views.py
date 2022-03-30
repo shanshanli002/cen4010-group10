@@ -32,14 +32,16 @@ def book_list(request):
     #returns all the books from db
     if request.method == 'GET':
         books = Book.objects.all()
-        author_name = request.GET.get('Author', '')
+        author_name = request.GET.get('Author')
+        serializer = BookSerializer(books, many=True)
         #validate there was a query param 
         if author_name is not None:
             #validate the author name
             print(author_name)
             #chose to filter based on author name string vs author id because it's faster
             books = books.filter(Author=author_name)
-        serializer = BookSerializer(books, many=True)
+            serializer = BookSerializer(books, many=True)
+        
         return JsonResponse(serializer.data, safe=False)
     
     #add new book in the db
