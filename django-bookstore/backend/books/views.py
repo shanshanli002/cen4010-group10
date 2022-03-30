@@ -2,7 +2,7 @@ from curses.ascii import HT
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
-from .models import *
+from books.models import Book, Author
 from .serializers import BookSerializer
 from .serializers import AuthorSerializer
 from django.views.decorators.csrf import csrf_exempt
@@ -21,6 +21,7 @@ def all_authors(request):
     """client view to search for books associated with a specific author do not need model"""
     authors = Author.objects.all()
     return render(request, "Author_Books.html", {'authors': authors}) 
+
 #view for launching django app's home page
 def homepage(request):
     return HttpResponse('Welcome to Bookstore')
