@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from books import views
-from books.views import all_books, all_authors, book_list, author_list, book_detail
+from books.views import all_books, all_authors, book_list, author_list, book_detail, Author_Books
 urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
