@@ -15,14 +15,9 @@ class Book(models.Model):
     Copies_Sold = models.IntegerField()
     ISBN = models.IntegerField()
  
-    def __str__(self):
-        return str(self)
-    
 class Author(models.Model):
     First_Name = models.CharField(max_length=200)
     Last_Name = models.CharField(max_length=200)
     Bio = models.CharField(max_length=10000)
     Publisher = models.CharField(max_length=200)
     
-    def __str__(self):
-        return str(self)

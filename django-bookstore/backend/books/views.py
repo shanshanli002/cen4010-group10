@@ -32,17 +32,23 @@ def book_list(request):
     #returns all the books from db
     if request.method == 'GET':
         books = Book.objects.all()
+        author_name = request.GET.get('Author', '')
+        #validate there was a query param 
+        if author_name is not None:
+            #validate the author name
+            print(author_name)
+            #chose to filter based on author name string vs author id because it's faster
+            books = books.filter(Author=author_name)
         serializer = BookSerializer(books, many=True)
         return JsonResponse(serializer.data, safe=False)
+    
     #add new book in the db
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = BookSerializer(data=data)
-       
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
-        
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
@@ -56,7 +62,7 @@ def book_detail(request, ISBN):
     #if book exists with the given ISBN and is a get method, return that book object which is the book variable
     if request.method == 'GET':
         serializer = BookSerializer(book)
-        return JsonResponse(serializer.data)
+        return JsonResponse(serializer.data, status = 201)
     #delete method will delete the book with a specific isbn
     elif request.method == 'DELETE':
         Book.objects.filter(ISBN = ISBN).delete()
@@ -68,7 +74,7 @@ def author_list(request):
         authors = Author.objects.all()
         serializer = AuthorSerializer(authors, many=True)
         return JsonResponse(serializer.data, safe=False)
-
+    #saving author json object to the db
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = AuthorSerializer(data=data)
@@ -78,28 +84,3 @@ def author_list(request):
             return JsonResponse(serializer.data, status = 201)
         
         return JsonResponse(serializer.errors, status = 400)
-    
-@csrf_exempt
-def author_books(request, First_Name, Last_Name):
-    try:
-        author = Author.objects.get(First_Name = First_Name)
-        author = Author.objects.get(Last_Name = Last_Name)
-    except Author.DoesNotExist:
-        return HttpResponse(status = 404)
-    
-    if request.method == 'GET':
-      Book.objects.filter(Author = f'{author.First_Name} {author.Last_Name}')
-      serializer = BookSerializer(Book.objects.filter(Author = f'{author.First_Name} {author.Last_Name}'), many=True)
-      return JsonResponse(serializer.data, safe=False)
-
-
-@csrf_exempt
-class Author_Books (generics.ListAPIView):
-    serializer = BookSerializer
-
-    def get_queryset(self):
-        bookset = Book.objects.all()
-        name = self.request.QUERY_PARAMS.get('Author',None)
-        if name is not None:
-            bookset = bookset.filter(Author=name)
-        return bookset
