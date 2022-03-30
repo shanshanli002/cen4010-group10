@@ -24,7 +24,7 @@ def all_authors(request):
 
 #view for launching django app's home page
 def homepage(request):
-    return HttpResponse('Welcome to Bookstore')
+    return HttpResponse(f"Welcome to CEN4010 Group 10's Bookstore")
 
 """api views inlcude method: book_list, author_list, """
 #csrf allows for post without auth
