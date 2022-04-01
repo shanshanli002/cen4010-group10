@@ -6,7 +6,7 @@ from .models import *
 # model for user admin 
 class UserAdmin(admin.ModelAdmin):
     #display for admin/users/accounts
-    list_display=('id','username','password','first_name','email','number')
+    list_display=('id','username','password','first_name','email')
     
 '''
 # model for credit card admin 

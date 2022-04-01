@@ -7,7 +7,7 @@ class Users(models.Model):
    password = models.CharField(max_length =20 )  
    first_name = models.CharField(max_length=200)
    email=models.CharField(max_length = 200)
-   number = models.CharField(max_length=13)
+   #number = models.CharField(max_length=13)
   
    def __str__(self):
        return str(self.users)
