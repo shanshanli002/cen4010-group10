@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISBN Search</title>
+</head>
+<body>
+    <h1>Book List</h1>
+     <input type="text" placeholder="Search">
+    <button type="submit">Search</button>
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Filters</option>
+        <option value="Top Sellers">Top Sellers</option>
+        <option value="Highest Rated">Highest Rated</option>
+        <option value="Crime">Crime</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Horror">Horror</option>
+        <option value="History">History</option>
+        <option value="Educational">Educational</option>
+        <option value="Self Help">Self Help</option>
+    </select>
+    <h2>List of All Books</h2>
+    {% for book in books %}
+    <div>
+    
+           <h5>Title:</h5> {{book.Title}}
+           <br>
+           <h5>Author:</h2>{{book.Author}}
+            <br>
+           <h5>Price:</h2>{{book.Price}}
+            <br>
+           <h5>Genre:</h2>{{book.Genre}}
+            <br>
+           <h5>Publisher:</h2>{{book.Publisher}}
+            <br>
+           <h5>Year Published:</h2>{{book.Year_Published}}
+            <br>
+           <h5>Copies Sold:</h2>{{book.Copies_Sold}}
+            <br>
+            <h5>ISBN:</h2>{{book.ISBN}}
+       </div> 
+        <br>
+    {% endfor %}
+
+    <style>
+        #isbn{ color:rgb(119, 119, 20); margin-left: 20px;}
+    </style>
+</body>
+</html>

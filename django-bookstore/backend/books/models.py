@@ -14,6 +14,7 @@ class Book(models.Model):
     Year_Published = models.IntegerField()
     Copies_Sold = models.IntegerField()
     ISBN = models.IntegerField()
+    #Ratings = models.IntegerField()
  
 class Author(models.Model):
     First_Name = models.CharField(max_length=200)
