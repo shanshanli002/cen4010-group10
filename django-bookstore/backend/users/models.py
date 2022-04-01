@@ -12,14 +12,3 @@ class Users(models.Model):
    def __str__(self):
        return str(self.users)
     
-'''
-#credit card model
-class Card(models.Model):
-    first_name = models.CharField(max_length=100)
-    creditCard_number = models.CharField(max_length=200)
-    creditCard_expiration = models.CharField(max_length=4)
-    creditCard_code = models.CharField(max_length=3)
-    
-    def __str__(self):
-        return str(self)
-    '''

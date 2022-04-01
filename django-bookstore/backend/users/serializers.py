@@ -15,10 +15,3 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'], validated_data['first_name'])
 
         return user
-'''
-#credit card serializer 
-class Card(serializers.ModelSerializer):
-    class Meta:
-        model = Card
-        fields = ('id', 'first_name','creditCard_nummber', 'creditCard_expiration', 'creditCard_code')
-        '''
