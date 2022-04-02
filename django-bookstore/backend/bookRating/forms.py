@@ -1,7 +1,7 @@
-from django import forms
+'''rom django import forms
 from .models import Comment
 from .models import Comments, Books
-
+'''
 
 """#---------------------------------------------------------------------------------------------
 class BookForm(ModelForm):
