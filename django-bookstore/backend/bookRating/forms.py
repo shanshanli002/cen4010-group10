@@ -3,10 +3,10 @@ from .models import Comment
 from .models import Comments, Books
 
 #---------------------------------------------------------------------------------------------
-class BookForm(ModelForm):
-    class Meta:
-        model = Books
-        fields = '__all__'
+#class BookForm(ModelForm):
+#    class Meta:
+#        model = Books
+#        fields = '__all__'
 
 
 class CommentForm(ModelForm):

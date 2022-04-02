@@ -2,20 +2,20 @@ from django.db import models
 
 # Create your models here.
 #---------------------------------------------------------------------------------------------
-class Books(models.Model): # book model 
-    author = models.ManyToManyField(Authors)
-    title = models.CharField(max_length=250)
-    number_of_pages = models.PositiveIntegerField(validators=[MaxValueValidator(99999999999)])
-    date_added = models.DateField(auto_now_add=True)
-    updated = models.DateField(auto_now=True)
-    publication_date = models.PositiveIntegerField(default=current_year(), validators=[MinValueValidator(300),
-                                                                                       max_value_current_year])
-    cover = models.ImageField(upload_to='pics/covers/', default='pics/default-cover.jpg')
-    pdf_file = models.FileField(upload_to='pdfs/books/', default='pdfs/default-pdf.pdf')
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.title
+#class Books(models.Model): # book model 
+#    author = models.ManyToManyField(Authors)
+#    title = models.CharField(max_length=250)
+#    number_of_pages = models.PositiveIntegerField(validators=[MaxValueValidator(99999999999)])
+#    date_added = models.DateField(auto_now_add=True)
+#   updated = models.DateField(auto_now=True)
+#    publication_date = models.PositiveIntegerField(default=current_year(), validators=[MinValueValidator(300),
+#                                                                                       max_value_current_year])
+#    cover = models.ImageField(upload_to='pics/covers/', default='pics/default-cover.jpg')
+#    pdf_file = models.FileField(upload_to='pdfs/books/', default='pdfs/default-pdf.pdf')
+#    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+#
+#    def __str__(self):
+#        return self.title
 
 
 
