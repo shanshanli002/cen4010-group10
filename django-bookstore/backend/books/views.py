@@ -23,10 +23,10 @@ def all_authors(request):
     authors = Author.objects.all()
     return render(request, "Author_Books.html", {'authors': authors}) 
 
-def book_list(request):
+def all_book_list(request):
     """client view to search for books associated with a specific genre"""
     books = Book.objects.all()
-    return render(request, "Book_Top_Sellers.html", {'books': books})
+    return render(request, "Book_List.html", {'books': books})
 
 def all_genres(request):
     """client view to search for books associated with a specific genre"""

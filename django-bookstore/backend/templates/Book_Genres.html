@@ -25,21 +25,21 @@
     {% for book in books %}
     <div>
     
-           <h5>Title:</h5> {{book.Title}}
-           <br>
-           <h5>Author:</h2>{{book.Author}}
-            <br>
-           <h5>Price:</h2>{{book.Price}}
-            <br>
-           <h5>Genre:</h2>{{book.Genre}}
-            <br>
-           <h5>Publisher:</h2>{{book.Publisher}}
-            <br>
-           <h5>Year Published:</h2>{{book.Year_Published}}
-            <br>
-           <h5>Copies Sold:</h2>{{book.Copies_Sold}}
-            <br>
-            <h5>ISBN:</h2>{{book.ISBN}}
+           <h5>Title:</h5> <h6>{{book.Title}}</h6>
+           
+           <h5>Author:</h5><h6>{{book.Author}}</h6>
+        
+           <h5>Price:</h5><h6>{{book.Price}}</h6>
+          
+           <h5>Genre:</h5><h6>{{book.Genre}}</h6>
+          
+           <h5>Publisher:</h5><h6>{{book.Publisher}}</h6>
+          
+           <h5>Year Published:</h5><h6>{{book.Year_Published}}</h6>
+         
+           <h5>Copies Sold:</h5><h6>{{book.Copies_Sold}}</h6>
+          
+            <h5>ISBN:</h5><h6>{{book.ISBN}}</h6>
        </div> 
         <br>
     {% endfor %}
