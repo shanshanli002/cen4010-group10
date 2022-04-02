@@ -9,16 +9,16 @@ def index(request):
 
 # Create your views here.
 #---------------------------------------------------------------------------------------------
-@login_required(login_url='login') #user is able to access book details only 
-def book_detail_view(request, book_id): #for book details or example of one 
+#@login_required(login_url='login') #user is able to access book details only 
+#def book_detail_view(request, book_id): #for book details or example of one 
+#
+#    books = get_object_or_404(Books, pk=book_id)
+#
+#    context = {'books': books,}
+#
+#    return render(request, 'book_detail.html', context)
 
-    books = get_object_or_404(Books, pk=book_id)
-
-    context = {'books': books,}
-
-    return render(request, 'book_detail.html', context)
-
-@login_required(login_url='login') #user is able to access comments only 
+"""@login_required(login_url='login') #user is able to access comments only 
 def add_comment(request, comment_id):
 
     form = CommentForm() # form - format of comment saved 
@@ -38,6 +38,7 @@ def add_comment(request, comment_id):
     context = {'form': form}
 
     return render(request, 'comment_form.html', context) # need to create front end html 
+"""
 #---------------------------------------------------------------------------------------------
 
 

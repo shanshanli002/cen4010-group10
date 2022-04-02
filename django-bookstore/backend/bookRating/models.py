@@ -19,7 +19,7 @@ from django.db import models
 
 
 
-
+"""""
 class Comments(models.Model): # comment model described as a model 
     book = models.ForeignKey(Books, on_delete=models.CASCADE) # foreign key from books used as a model 
     user = models.ForeignKey(User, on_delete=models.CASCADE) # foreign key from users used as a model 
@@ -30,6 +30,7 @@ class Comments(models.Model): # comment model described as a model
 
     def __str__(self):
         return '{} - {}'.format(self.livre.title, self.user)
+"""
 #---------------------------------------------------------------------------------------------
 
 

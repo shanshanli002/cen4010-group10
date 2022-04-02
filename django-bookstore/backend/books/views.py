@@ -1,12 +1,12 @@
 from curses.ascii import HT
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-#from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser
 from books.models import Book, Author
 from .serializers import BookSerializer
 from .serializers import AuthorSerializer
 from django.views.decorators.csrf import csrf_exempt
-#from rest_framework import generics
+from rest_framework import generics
 
 
 """regular django views to view all books and all authors include methods: all_books and all_authors"""

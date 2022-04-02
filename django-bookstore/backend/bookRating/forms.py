@@ -8,11 +8,12 @@ from .models import Comments, Books
 #        model = Books
 #        fields = '__all__'
 
-
-class CommentForm(ModelForm):
+"""""
+class CommentForm(forms.ModelForm): # <---- Might be incorrect 
     class Meta:
         model = Comments
         fields = ['body']
+"""""
 #---------------------------------------------------------------------------------------------
 
 #class NewCommentForm(form.ModelForm):
