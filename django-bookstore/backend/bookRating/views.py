@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+
+"""from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Books
 from .forms import CommentForm
@@ -70,3 +71,5 @@ def add_comment(request, comment_id):
 #                'comment_form': comment_form
 #            },
 #        )
+
+"""

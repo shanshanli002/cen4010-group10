@@ -2,7 +2,7 @@ from django import forms
 from .models import Comment
 from .models import Comments, Books
 
-#---------------------------------------------------------------------------------------------
+"""#---------------------------------------------------------------------------------------------
 class BookForm(ModelForm):
     class Meta:
         model = Books
@@ -23,4 +23,4 @@ class CommentForm(ModelForm):
 #            "rating" : forms.TextInput(attrs={"class": "col-sm-12"}),
 #            "name" : forms.TextInput(attrs={"class": "col-sm-12"}),
 #            "content" : forms.TextInput(attrs={"class": "form-control"}),
-#        }
+#        }"""
