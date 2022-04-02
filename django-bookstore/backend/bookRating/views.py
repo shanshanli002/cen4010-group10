@@ -1,5 +1,4 @@
-
-"""from django.http import HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Books
 from .forms import CommentForm
@@ -19,7 +18,7 @@ def index(request):
 #
 #    return render(request, 'book_detail.html', context)
 
-"""@login_required(login_url='login') #user is able to access comments only 
+@login_required(login_url='login') #user is able to access comments only 
 def add_comment(request, comment_id):
 
     form = CommentForm() # form - format of comment saved 
@@ -39,7 +38,7 @@ def add_comment(request, comment_id):
     context = {'form': form}
 
     return render(request, 'comment_form.html', context) # need to create front end html 
-"""
+
 #---------------------------------------------------------------------------------------------
 
 
@@ -72,5 +71,3 @@ def add_comment(request, comment_id):
 #                'comment_form': comment_form
 #            },
 #        )
-
-"""
