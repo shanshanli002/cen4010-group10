@@ -35,4 +35,5 @@ urlpatterns = [
     path('books/<int:ISBN>/', book_detail),
     #api views for profile management
     path('users/',List_All_Users)
+    path('users/<string:username>/',User_Detail)
 ]

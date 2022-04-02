@@ -35,13 +35,12 @@ def List_All_Users(request):
 #retrieve user information  
 def User_Detail(request, username):
     try:
-        users = Users.objects.all()
+        users = Users.objects.get(username = username)
 
     except Users.DoesNotExist:
         raise Http404
          
     if request.method == 'GET':
-        Users.objects.filter(Users = f'{First_Name}')
         serializer = UserSerializer(users, many = True)
         return JsonResponse(serializer.data, status = 200, safe=False)
       
@@ -50,9 +49,9 @@ def User_Detail(request, username):
 #update user information
 @api_view(["PUT"])
 @csrf_exempt
-def Update_User(self, request):
+def Update_User(request):
     try:
-        users = Users.objects.filter(username=users)
+        users = Users.objects.filter(username=username)
       
         users.update(**payload)
         users = Users.objects.get(username=username)
