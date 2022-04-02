@@ -1,4 +1,4 @@
-from django.db import models
+"""from django.db import models
 
 # Create your models here.
 #---------------------------------------------------------------------------------------------
@@ -48,3 +48,4 @@ class Comments(models.Model): # comment model described as a model
 #        ordering = ("publish",) # ordering for date 
 #    def __str__(self):   
 #       return f"Comment by {self.name}" # commented by who
+"""

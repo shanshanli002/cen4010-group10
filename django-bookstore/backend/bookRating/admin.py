@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 from . import models #added import 
 
 # Register your models here.
@@ -9,4 +9,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ("rating", "user", "book") # include "publish" for extra display 
     list_filter = ("date") # for filtering the comment by approval and date 
     search_fields = ("user", "body", "rating")
+<<<<<<< HEAD
 """
+=======
+    """
+>>>>>>> e82333c653ae2a1cc8e37c2047bdf6c02854ad65
