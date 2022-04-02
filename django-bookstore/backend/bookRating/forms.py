@@ -2,11 +2,19 @@ from django import forms
 from .models import Comment
 from .models import Comments, Books
 
+
 """#---------------------------------------------------------------------------------------------
 class BookForm(ModelForm):
     class Meta:
         model = Books
         fields = '__all__'
+
+#---------------------------------------------------------------------------------------------
+#class BookForm(ModelForm):
+#    class Meta:
+#        model = Books
+#        fields = '__all__'
+>>>>>>> c6903761aa38f105caff10c266029bd98b8258cd
 
 
 class CommentForm(ModelForm):
