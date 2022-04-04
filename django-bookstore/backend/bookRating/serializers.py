@@ -1,7 +1,7 @@
-from rest_framework import serializers
-from books.models import Comments
+#from rest_framework import serializers
+#from books.models import Comments
 
-
+"""
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
@@ -17,3 +17,4 @@ class CommentsSerializer(serializers.ModelSerializer):
 #    class Meta:
 #        model = Comments
 #        fields = ['body']
+"""
