@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .models import Book
 
 
-
+"""
 #@login_required(login_url='login')
 def add_comment(request, comment_id):
 
@@ -25,3 +25,4 @@ def add_comment(request, comment_id):
     return render(request, 'comment_form.html', context) # need to create front end html 
 
 #---------------------------------------------------------------------------------------------
+"""
