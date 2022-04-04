@@ -22,6 +22,9 @@ from books import views
 from books.views import all_books, all_authors, book_list, author_list, book_detail
 from users.views import List_All_Users
 
+from bookRating import views
+from bookRating.views import add_comment
+
 urlpatterns = [
     #regular views for the django app
     path('', views.homepage),

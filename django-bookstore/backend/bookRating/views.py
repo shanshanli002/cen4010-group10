@@ -1,18 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .models import Book
-from .forms import CommentForm
 
 
-@login_required(login_url='login') #user is able to access comments only 
+
+#@login_required(login_url='login')
 def add_comment(request, comment_id):
 
-    form = CommentForm() # form - format of comment saved 
+    #form = CommentForm() # form - format of comment saved 
     books = get_object_or_404(Book, pk=comment_id) # collect information from the book
     user = request.user #user must be created 
 
     # if someone has made a comment checking and monitoring 
     if request.method == "POST": 
-        form = CommentForm(request.POST) # collect information from request data to comment_form
+        form = request.POST # collect information from request data to comment_form
         if form.is_valid(): # checking information is valid 
             comment = form.save(commit=False) # preparing to save data but not yet commited 
             comment.user = user # saving user information

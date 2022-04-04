@@ -5,7 +5,7 @@ from books.models import Comments
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ['rating', 'user', 'book']
+        fields = ['book', 'user', 'body', 'date', 'rating']
 
  
 #    def create(self, validated_data):
