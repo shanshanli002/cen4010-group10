@@ -11,7 +11,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 
 
-
 #list all users 
 @csrf_exempt
 def List_All_Users(request):
