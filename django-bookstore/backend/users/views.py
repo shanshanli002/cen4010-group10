@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 
 
-"""api views inlcude method: book_list, author_list, """
+"""api views inlcude method: customer list, """
 #csrf allows for post without auth
 @csrf_exempt
 def List_All_Customers(request):
