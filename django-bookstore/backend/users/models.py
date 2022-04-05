@@ -13,7 +13,7 @@ class Users(models.Model):
 =======
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user =models.CharField(max_length=200,null=True)
     name=models.CharField(max_length=200,null=True)
     email=models.CharField(max_length=200,null=True)
 <<<<<<< HEAD
