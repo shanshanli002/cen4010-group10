@@ -10,4 +10,4 @@ class Customer(models.Model):
     card_info=models.CharField(max_length=200,null=True)
     
     def __str__(self):
-        return str(self.name)
+        return str(self.Customer)
