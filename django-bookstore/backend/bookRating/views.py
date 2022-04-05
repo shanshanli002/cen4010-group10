@@ -1,14 +1,15 @@
-#from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-#from .models import Book
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from books.models import Book
+from users.models import Users
+from django.contrib.auth.decorators import login_required
 
 
-"""
 #@login_required(login_url='login')
 def add_comment(request, comment_id):
 
     #form = CommentForm() # form - format of comment saved 
     books = get_object_or_404(Book, pk=comment_id) # collect information from the book
-    user = request.user #user must be created 
+    user = request.Users #user must be created 
 
     # if someone has made a comment checking and monitoring 
     if request.method == "POST": 
@@ -25,4 +26,3 @@ def add_comment(request, comment_id):
     return render(request, 'comment_form.html', context) # need to create front end html 
 
 #---------------------------------------------------------------------------------------------
-"""
