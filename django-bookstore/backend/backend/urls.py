@@ -20,7 +20,7 @@ from django.urls import path
 from django.urls import include
 from books import views
 from books.views import book_list, book_detail, author_list, all_books, all_authors
-#from users.views import List_All_Users
+from users.views import List_All_Customers,Customer_detail
 
 
 
@@ -36,7 +36,7 @@ urlpatterns = [
     path('authors/', author_list),
     path('books/<int:ISBN>/', book_detail),
     #api views for profile management
-    #path('users/',List_All_Users),
-    path('',include('users.urls')),
+    path('users/',List_All_Customers),
+    path('users/<str:name>/',Customer_detail)
   
 ]
