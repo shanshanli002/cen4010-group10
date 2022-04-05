@@ -28,9 +28,10 @@ def cartItems(request):
 @csrf_exempt    
 def addBook(request, pk):
         if request.method == ('PUT'):
+            return
         
 
-@csrf_exempt    
+@csrf_exempt  
 def deleteItem(self, request, pK = None):
         if request.method == ('DELETE'):
             Cart.objects.filter(item = item)
