@@ -36,7 +36,7 @@ urlpatterns = [
     path('authors/', author_list),
     path('books/<int:ISBN>/', book_detail),
     #api views for profile management
-    path('customer/',List_All_Customers),
+    path('allcustomer/',List_All_Customers),
     path('customer/<str:name>/',Customer_detail)
   
 ]
