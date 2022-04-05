@@ -22,7 +22,8 @@ from books import views
 from books.views import all_books, all_authors, book_list, author_list, book_detail
 from users.views import List_All_Users
 
-from bookRating.views import add_comment
+#from bookRating.views import comment_View, some_name
+
 
 urlpatterns = [
     #regular views for the django app
@@ -37,6 +38,6 @@ urlpatterns = [
     path('api/books/<int:ISBN>/', book_detail),
     #api views for profile management
     path('users/',List_All_Users),
-    #api views for book rating
-    path('comments/',add_comment)
+    #regular views for book rating
+    #path('comments/',some_name)
 ]
