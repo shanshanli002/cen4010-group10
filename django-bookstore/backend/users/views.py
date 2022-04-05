@@ -34,7 +34,8 @@ def List_All_Customers(request):
 def Customer_detail(customer):
     #check if the customer with the given name is in the database
     try:
-        customer = Customer.objects.filter(name = name['name'])
+        customer = str(request.POST['name'])
+        customer = Customer.objects.filter(name = name)
     #if not in database, throw 400 error 
     except Customer.DoesNotExist:
         return HttpResponse(status = 404)
