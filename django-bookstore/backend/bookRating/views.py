@@ -1,37 +1,48 @@
-from bookRating.serializers import CommentSerializer
-from django.http import JsonResponse
-from rest_framework.parsers import JSONParser
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, HttpResponse
-from bookRating.models import Comment
-from rest_framework import viewsets
+from django.contrib.auth.decorators import login_required
 
-#@csrf_exempt
-#def comment_View(request):
-#    comment = Comment.objects.all()
-#    return HttpResponse('stroke')
-     
+from django.shortcuts import render, redirect, get_object_or_404
 
-#@login_required(login_url='login')
-#def add_comment(request, comment_id):
 
-    #form = CommentForm() # form - format of comment saved 
-#    books = get_object_or_404(Book, pk=comment_id) # collect information from the book
-#    user = request.Users #user must be created 
+from .models import Book
+from .forms import CommentForm
 
-    # if someone has made a comment checking and monitoring 
-#    if request.method == "POST": 
-#       form = request.POST # collect information from request data to comment_form
-#        if form.is_valid(): # checking information is valid 
-#            comment = form.save(commit=False) # preparing to save data but not yet commited 
-#            comment.user = user # saving user information
-#            comment.book = books # saving book information
-#            comment.save() # saving to database
-#            return redirect('book_detail', books.id) # redirect to the page of the book
+def product_page(request, pk):
+    book = get_object_or_404(Book, pk=pk)
 
-#    context = {'form': form}
+    if not request.user.is_authenticated:
+        is_comment_allowed = False
+    else:
+        is_comment_allowed = (
+            not request.user.comments.filter(book__pk=pk).exists()
+            and book in request.user.books.all()
+        )
+    
+    if request.method == "GET" or not is_comment_allowed:
+        return render(
+            request, "market/product.html",
+            dict(book=book, is_comment_allowed=is_comment_allowed)
+        )
 
-#    return render(request, 'comment_form.html', context) # need to create front end html 
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.book = book
+        comment.author = request.user
+        comment.save()
+        if book.score == 0:
+            book.score = comment.score
+        else:
+            book.score = (book.score + comment.score) / 2.0
+        book.save()
+    
+    return redirect("product_page", pk=pk)
 
-#---------------------------------------------------------------------------------------------
-
+@login_required
+def profile_page(request):
+    return render(
+        request, "market/profile.html",
+        dict(
+            books=request.user.books,
+            comments=request.user.comments
+        )
+    )

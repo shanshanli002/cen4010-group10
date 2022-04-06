@@ -3,10 +3,32 @@ from books.models import Book
 from users.models import Users
 
 class Comment(models.Model):
-    #book = models.ForeignKey(Book, on_delete=models.CASCADE,default='Title') # foreign key from books used as a model 
-    #user = models.ForeignKey(Users, on_delete=models.CASCADE,default='first_name') # foreign key from users used as a model 
-    book = models.CharField(max_length = 500)
-    user = models.CharField(max_length = 500) 
-    body = models.CharField(max_length = 500) 
-    rating = models.CharField(max_length = 500)
-    date = models.DateField()
+    author = models.ForeignKey(
+        Users,
+        on_delete=models.CASCADE,
+        related_name="comments"
+    )
+    book = models.ForeignKey(
+        "Book",
+        on_delete=models.CASCADE,
+        related_name="comments"
+    )
+    score = models.PositiveSmallIntegerField(
+        choices=(
+            (1, "★☆☆☆☆"),
+            (2, "★★☆☆☆"),
+            (3, "★★★☆☆"),
+            (4, "★★★★☆"),
+            (5, "★★★★★"),
+        )
+    )
+    title = models.CharField(max_length=180)
+    content = models.CharField(max_length=900)
+    timestamp = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return ", ".join((str(self.author), str(self.book)))
+
+    class Meta:
+        ordering = ["-timestamp"]
+        unique_together = ("author", "book",)
