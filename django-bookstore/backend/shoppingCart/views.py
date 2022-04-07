@@ -1,39 +1,59 @@
-from crypt import methods
 from webbrowser import get
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from rest_framework import viewsets
 from rest_framework import request, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Cart 
-from .serializer import UserSerializer, CartSerializer 
 from django.http import HttpResponse, JsonResponse
 from users.models import Users
-from django.views.decorators.csrf import csrf_exempt
 from books.models import Book
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from shoppingCart.form import shoppingCartForm
 
+@login_required
+@require_POST
+def submitCart(request):
+    books = list(request.users.shoppingCart.all())
+    request.users.books.add(*books)
+    request.users.shoppingCartart.clear()
+    request.users.save()
 
-class UserView(viewsets.ModelViewSet):
-    queryset = Users.objects.all().order_by('id')
-    serializer_class = UserSerializer
+    for book in books:
+        book.holders_count += 1
+        book.save()
 
-@csrf_exempt
-def cartItems(request):
-        if request.method == ('GET'):
-           allBooks = Cart.objects.all()
-           serializer = CartSerializer(allBooks , many = True)
-           return JsonResponse(serializer.data, status = 200, safe=False)
+    return redirect("shoppingCart")
 
-@api_view(['PUT'])
-@csrf_exempt    
-def addBook(request, pk):
-        if request.method == ('PUT'):
-            return
-        
+@login_required
+@require_POST
+def addToCart(request):
+    form = shoppingCartForm(request.POST)
+    if not form.is_valid():
+        return redirect("/")
+    book_pk = form.cleaned_data.get("book_pk")
+    try:
+        book = Book.objects.get(pk=book_pk)
+    except Book.DoesNotExist:
+        return redirect("/")
 
-@csrf_exempt  
-def deleteItem(self, request, pK = None):
-        if request.method == ('DELETE'):
-            Cart.objects.filter(item = item)
+    request.users.shoppingCart.add(book)
+    request.users.save()
+    return redirect(form.cleaned_data.get("next_link"))
 
+@login_required
+@require_POST
+def removeFromCart(request):
+    form = shoppingCartForm(request.POST)
+    if not form.is_valid():
+        return redirect("/")
+    book_pk = form.cleaned_data.get("book_pk")
+    try:
+        book = Book.objects.get(pk=book_pk)
+    except Book.DoesNotExist:
+        return redirect("/")
+
+    request.users.shoppingCart.remove(book)
+    request.users.save()
+    return redirect(form.cleaned_data.get("next_link"))
        

@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from users.views import *
 from users import views
+from shoppingCart import views
 from django.urls import path
 from django.urls import include
 from books import views
 from books.views import all_books, all_authors, book_list, author_list, book_detail
 from users.views import List_All_Users
+from shoppingCart.views import addToCart, removeFromCart, submitCart
 
 urlpatterns = [
     #regular views for the django app
@@ -34,5 +36,7 @@ urlpatterns = [
     path('api/authors/', author_list),
     path('api/books/<int:ISBN>/', book_detail),
     #api views for profile management
-    path('users/',List_All_Users)
+    path('users/',List_All_Users),
+    #api views for shoppingCart
+    path('shoppingCart/', addToCart, removeFromCart, submitCart),
 ]

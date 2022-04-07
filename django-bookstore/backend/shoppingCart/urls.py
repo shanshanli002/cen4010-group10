@@ -1,11 +1,8 @@
 from django.urls import include, path
-from rest_framework import routers
-from shoppingCart import views
-
-router = routers.DefaultRouter()
-router.register(r'cart', views.CartView)
-router.register(r'user', views.UserView)
+from . import views
 
 urlpatterns = [
-    path('', include((router.urls, 'django-bookstore.backend.shoppingCart'))),
+    path("shoppingCart/add/", views.addToCart, name="shoppingCart_add"),
+    path("shoppingCart/remove/", views.removeFromCart, name="shoppingCart_remove"),
+    path("shoppingCart/submit/", views.submitCart, name="shoppingCart_submit"),
 ]
