@@ -25,4 +25,4 @@ class Customer(models.Model):
 >>>>>>> 3376cec (created customer model and credit card)
     
     def __str__(self):
-        return str(self.name)
+        return str(self.Customer)
