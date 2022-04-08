@@ -19,8 +19,13 @@ from users import views
 from django.urls import path
 from django.urls import include
 from books import views
+<<<<<<< HEAD
 from books.views import all_books, all_authors, book_list, author_list, book_detail
 from users.views import List_All_Users
+=======
+from books.views import book_list, book_detail, author_list, all_books, all_authors
+from users.views import List_All_Users, User_Detail
+>>>>>>> 2a30d92 (retrieving user by certain id)
 
 urlpatterns = [
     #regular views for the django app
@@ -34,6 +39,7 @@ urlpatterns = [
     path('api/authors/', author_list),
     path('api/books/<int:ISBN>/', book_detail),
     #api views for profile management
-    path('users/',List_All_Users)
-    path('users/<string:username>/',User_Detail)
+    path('users/',List_All_Users),
+    path('users/<int:id>/',User_Detail)
+    
 ]
