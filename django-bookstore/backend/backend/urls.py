@@ -21,6 +21,7 @@ from django.urls import include
 from books import views
 <<<<<<< HEAD
 from books.views import all_books, all_authors, book_list, author_list, book_detail
+<<<<<<< HEAD
 from users.views import List_All_Users
 =======
 from books.views import book_list, book_detail, author_list, all_books, all_authors
@@ -44,6 +45,9 @@ from users.views import List_All_Customers,Customer_detail
 
 
 >>>>>>> 74df3a7 (customer views)
+=======
+
+>>>>>>> 4385bf9 (created the url patterns for customer views.py)
 
 urlpatterns = [
     #regular views for the django app
@@ -72,6 +76,7 @@ urlpatterns = [
     #path('allcustomer/',List_All_Customers)
 >>>>>>> 41bd7c8 ( created get method to gather card infor for user)
     #api views for profile management
+<<<<<<< HEAD
     #path('allcustomer/<str:pk>/',views.List_All_Customers, name="allcustomer"),
     #path('customer/<int:pk>/',Customer_detail),
     #path('customer/update/',post)
@@ -79,4 +84,8 @@ urlpatterns = [
 =======
  
 >>>>>>> 003a6df (created url path and customer model)
+=======
+    path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
+    path(r'allcustomer/listcards/',ListCards.as_view())
+>>>>>>> 4385bf9 (created the url patterns for customer views.py)
 ]

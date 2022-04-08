@@ -32,11 +32,7 @@ class CustomerView(APIView):
   
 
   
-<<<<<<< HEAD
-  #update the user information ex: name, email, address
-=======
 #update the user information ex: name, email, address
->>>>>>> 2186330 (added address to user form)
     def put(self,request,pk=None):
         if request.method == 'PUT':
             customer = Customer.objects.all()
@@ -66,7 +62,4 @@ class ListCards(APIView):
             
        
         
-<<<<<<< HEAD
-=======
       
->>>>>>> 2186330 (added address to user form)
