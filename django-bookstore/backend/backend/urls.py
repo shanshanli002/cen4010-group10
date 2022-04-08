@@ -25,10 +25,14 @@ from users.views import List_All_Users
 =======
 from books.views import book_list, book_detail, author_list, all_books, all_authors
 <<<<<<< HEAD
+<<<<<<< HEAD
 from users.views import List_All_Users, User_Detail
 >>>>>>> 2a30d92 (retrieving user by certain id)
 =======
 #from users.views import List_All_Users
+=======
+from users.views import List_All_Customers,Customer_detail
+>>>>>>> 3376cec (created customer model and credit card)
 
 
 >>>>>>> 74df3a7 (customer views)
@@ -45,7 +49,7 @@ urlpatterns = [
     path('api/authors/', author_list),
     path('api/books/<int:ISBN>/', book_detail),
     #api views for profile management
-    #path('users/',List_All_Users),
-    path('',include('users.urls')),
+    path('users/',List_All_Customers),
+    path('users/<str:name>/',Customer_detail)
   
 ]
