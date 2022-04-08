@@ -24,7 +24,8 @@ class BooksRegular():
 
     #view for launching django app's home page
     def homepage(request):
-        return HttpResponse(f"Welcome to CEN4010 Group 10's Bookstore")
+        #return HttpResponse(f"Welcome to CEN4010 Group 10's Bookstore")
+        return render(request, "bookstorehome.html")
 
 class BooksApi():
     """api views inlcude method: book_list, author_list, """
