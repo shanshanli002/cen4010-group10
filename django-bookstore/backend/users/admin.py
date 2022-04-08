@@ -8,7 +8,7 @@ from .models import *
 
 class CustomerAdmin(admin.ModelAdmin):
     #display for admin/users/accounts
-    list_display=('id','user','name','email','address','password','card_info')
+    list_display=('id','username','name','email','address','password','card_info')
  
 
 admin.site.register(Customer)
