@@ -1,27 +1,30 @@
-from django.shortcuts import render, redirect, HttpResponse
-from rest_framework import generics, permissions
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .serializers import UserSerializer
-from .models import Users
+from curses.ascii import HT
+from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
-from django.core.exceptions import ObjectDoesNotExist
+from .models import *
+from .serializers import CustomerSerializer
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import generics
 
 
-#list all users 
+#view for launching django app's home page
+def homepage(request):
+    return HttpResponse('Welcome to Bookstore')
+
+"""api views inlcude method: book_list, author_list, """
+#csrf allows for post without auth
 @csrf_exempt
-def List_All_Users(request):
-    users = Users.objects.all()
-    
+def List_All_Customers(request):
+    #returns all the customer from db
     if request.method == 'GET':
-        serializer = UserSerializer(users, many = True)
-        return JsonResponse(serializer.data, status = 200, safe=False)
+        Customer = Customer.objects.all()
+        serializer = CustomerSerializer(Customer, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    #add new customer in the db
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = UserSerializer(data=data)
+        serializer = CustomerSerializer(data=data)
        
         if serializer.is_valid():
             serializer.save()
@@ -29,77 +32,19 @@ def List_All_Users(request):
         
         return JsonResponse(serializer.errors, status=400)
 
-        
-# retrieve user account by username
-@csrf_exempt 
-def User_Detail(request, id): 
-    try:
-        #users = request.user.username
-        users = Users.objects.get(id = id)
-
-    except Users.DoesNotExist:
-        raise Http404
-         
-    if request.method == 'GET':
-        serializer = UserSerializer(users, many = True)
-        return JsonResponse(serializer.data, status = 200, safe=False)
-      
-    return JsonResponse(serializer.errors, status=400)
-
-#update user information
-@api_view(["PUT"])
 @csrf_exempt
-def Update_User(request):
+def Customer_detail(request, name):
+    #check if the customer with the given name is in the database
     try:
-        users = Users.objects.filter(username=username)
-      
-        users = Users.objects.get(username=username)
-        users = Users.objects.get(first_name=first_name)
-        serializer = UsersSerializer(users)
-        
-        instance.save()
-        return JsonResponse(serializer.data, safe=False, status=200)
-    
-    except ObjectDoesNotExist as e:
-        return JsonResponse({'error': str(e)}, safe=False, status=400)
-    except Exception:
-        return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=500)
-     
-@csrf_exempt    
-def Delete_User(self, request, pk, format=None):
-    user = self.get_object(pk)
-    user.delete()
-    return Response(status=204)
-    
-    
-'''
-def Update_Users(request, username, first_name):
-    users = request.users.id
-    
-    if request.method == 'PUT':
-        serializer = UserSerializer(users, many = True)
-        return JsonResponse(serializer.data, status = 200, safe=False)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UserSerializer(data=data)
-       
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        
-        return JsonResponse(serializer.errors, status=400)
-    
-    
-    try:
-        users = Users.objects.filter(username=users, first_name=first_name)
-      
-        users.update(**payload)
-        users = Users.objects.get(username=username)
-        users = Users.objects.get(first_name=first_name)
-        serializer = UsersSerializer(users)
-        return JsonResponse({'users': serializer.data}, safe=False, status=status.HTTP_2010_OK)
-    except ObjectDoesNotExist as e:
-      return JsonResponse({'error': str(e)}, safe=False, status=status.HTTP_404_NOT_FOUND)
-    except Exception:
-      return JsonResponse({'error': 'Something terrible went wrong'}, safe=False, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-'''
+        Customer = Customer.objects.get(name = name)
+    #if not in database, throw 400 error 
+    except Customer.DoesNotExist:
+        return HttpResponse(status = 404)
+    #if customer exists with the given name and is a get method, return that name object 
+    if request.method == 'GET':
+        serializer = CustomerSerializer(Customer)
+        return JsonResponse(serializer.data)
+    #delete method will delete the customer with a specific name
+    elif request.method == 'DELETE':
+        Customer.objects.filter(name = name).delete()
+        return HttpResponse(status=204)

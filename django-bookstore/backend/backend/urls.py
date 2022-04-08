@@ -24,8 +24,14 @@ from books.views import all_books, all_authors, book_list, author_list, book_det
 from users.views import List_All_Users
 =======
 from books.views import book_list, book_detail, author_list, all_books, all_authors
+<<<<<<< HEAD
 from users.views import List_All_Users, User_Detail
 >>>>>>> 2a30d92 (retrieving user by certain id)
+=======
+#from users.views import List_All_Users
+
+
+>>>>>>> 74df3a7 (customer views)
 
 urlpatterns = [
     #regular views for the django app
@@ -39,7 +45,7 @@ urlpatterns = [
     path('api/authors/', author_list),
     path('api/books/<int:ISBN>/', book_detail),
     #api views for profile management
-    path('users/',List_All_Users),
-    path('users/<int:id>/',User_Detail)
-    
+    #path('users/',List_All_Users),
+    path('',include('users.urls')),
+  
 ]
