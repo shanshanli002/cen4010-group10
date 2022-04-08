@@ -26,13 +26,13 @@ urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
     path('admin/', admin.site.urls),
-    #regular django views for book details
-    path('allbooks/', all_books),
-    path('allauthors/', all_authors),
-    #api views for book details 
-    path('books/',book_list),
-    path('authors/', author_list),
-    path('books/<int:ISBN>/', book_detail),
+    #regular django views for book details 
+    path('books/', all_books),
+    path('authors/', all_authors),
+    #api views for book details
+    path('api/books/', book_list),
+    path('api/authors/', author_list),
+    path('api/books/<int:ISBN>/', book_detail),
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view())
