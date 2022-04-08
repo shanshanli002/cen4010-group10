@@ -8,7 +8,7 @@ from .serializers import AuthorSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 
-class djangoBooks():
+class BooksRegular():
     """regular django views to view all books and all authors include methods: all_books and all_authors"""
     def all_books(request):
         """client view to search for book to view book details do not need model"""
@@ -26,7 +26,7 @@ class djangoBooks():
     def homepage(request):
         return HttpResponse(f"Welcome to CEN4010 Group 10's Bookstore")
 
-class APIMethods():
+class BooksApi():
     """api views inlcude method: book_list, author_list, """
     #csrf allows for post without auth
     @csrf_exempt

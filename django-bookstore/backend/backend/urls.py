@@ -19,19 +19,19 @@ from users import views
 from django.urls import path
 from django.urls import include
 from books import views
-from books.views import djangoBooks, APIMethods
+from books.views import BooksRegular, BooksApi
 
 
 urlpatterns = [
     #regular views for the django app
-    path('', djangoBooks.homepage),
+    path('', BooksRegular.homepage),
     path('admin/', admin.site.urls),
     #regular django views for book details 
-    path('books/', djangoBooks.all_books),
-    path('authors/', djangoBooks.all_authors),
+    path('books/', BooksRegular.all_books),
+    path('authors/', BooksRegular.all_authors),
     #api views for book details
-    path('api/books/', APIMethods.book_list),
-    path('api/authors/', APIMethods.author_list),
+    path('api/books/', BooksApi.book_list),
+    path('api/authors/', BooksApi.author_list),
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view())
