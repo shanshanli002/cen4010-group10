@@ -31,10 +31,10 @@ def List_All_Customers(request):
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def Customer_detail(request, name):
+def Customer_detail(customer):
     #check if the customer with the given name is in the database
     try:
-        customer = Customer.objects.get(name = name)
+        customer = Customer.objects.filter(name = name['name'])
     #if not in database, throw 400 error 
     except Customer.DoesNotExist:
         return HttpResponse(status = 404)
