@@ -18,9 +18,13 @@ class Customer(models.Model):
     name=models.CharField(max_length=200,null=True)
     email=models.CharField(max_length=200,null=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
     date_created=models.DateTimeField(auto_now_add=True,null=True)
 >>>>>>> 74df3a7 (customer views)
 =======
+=======
+    address=models.CharField(max_length=200,null=True)
+>>>>>>> 003a6df (created url path and customer model)
     password=models.CharField(max_length=200,null=True)
     card_info=models.CharField(max_length=200,null=True)
 >>>>>>> 3376cec (created customer model and credit card)
@@ -31,6 +35,8 @@ class Customer(models.Model):
         return self.name
     def get_email(self):
         return self.email
+    def get_address(self):
+        return self.address
     def get_password(self):
         return self.password
     def get_card_info(self):

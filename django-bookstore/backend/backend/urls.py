@@ -27,6 +27,7 @@ from books.views import book_list, book_detail, author_list, all_books, all_auth
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from users.views import List_All_Users, User_Detail
 >>>>>>> 2a30d92 (retrieving user by certain id)
 =======
@@ -37,6 +38,9 @@ from users.views import List_All_Customers,Customer_detail
 =======
 #from users.views import List_All_Customers
 >>>>>>> 41bd7c8 ( created get method to gather card infor for user)
+=======
+
+>>>>>>> 003a6df (created url path and customer model)
 
 
 >>>>>>> 74df3a7 (customer views)
@@ -61,8 +65,10 @@ urlpatterns = [
     path('books/',book_list),
     path('authors/', author_list),
     path('books/<int:ISBN>/', book_detail),
+    #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view())
+<<<<<<< HEAD
     #path('allcustomer/',List_All_Customers)
 >>>>>>> 41bd7c8 ( created get method to gather card infor for user)
     #api views for profile management
@@ -70,4 +76,7 @@ urlpatterns = [
     #path('customer/<int:pk>/',Customer_detail),
     #path('customer/update/',post)
   
+=======
+ 
+>>>>>>> 003a6df (created url path and customer model)
 ]
