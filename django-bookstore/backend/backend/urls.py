@@ -19,49 +19,13 @@ from users import views
 from django.urls import path
 from django.urls import include
 from books import views
-<<<<<<< HEAD
-from books.views import all_books, all_authors, book_list, author_list, book_detail
-<<<<<<< HEAD
-from users.views import List_All_Users
-=======
 from books.views import book_list, book_detail, author_list, all_books, all_authors
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-from users.views import List_All_Users, User_Detail
->>>>>>> 2a30d92 (retrieving user by certain id)
-=======
-#from users.views import List_All_Users
-=======
-from users.views import List_All_Customers,Customer_detail
->>>>>>> 3376cec (created customer model and credit card)
-=======
-#from users.views import List_All_Customers
->>>>>>> 41bd7c8 ( created get method to gather card infor for user)
-=======
 
->>>>>>> 003a6df (created url path and customer model)
-
-
->>>>>>> 74df3a7 (customer views)
-=======
-
->>>>>>> 4385bf9 (created the url patterns for customer views.py)
 
 urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
-    #regular django views for book details 
-    path('books/', all_books),
-    path('authors/', all_authors),
-    #api views for book details
-    path('api/books/', book_list),
-    path('api/authors/', author_list),
-    path('api/books/<int:ISBN>/', book_detail),
-=======
     #regular django views for book details
     path('allbooks/', all_books),
     path('allauthors/', all_authors),
@@ -72,20 +36,5 @@ urlpatterns = [
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view())
-<<<<<<< HEAD
-    #path('allcustomer/',List_All_Customers)
->>>>>>> 41bd7c8 ( created get method to gather card infor for user)
-    #api views for profile management
-<<<<<<< HEAD
-    #path('allcustomer/<str:pk>/',views.List_All_Customers, name="allcustomer"),
-    #path('customer/<int:pk>/',Customer_detail),
-    #path('customer/update/',post)
-  
-=======
- 
->>>>>>> 003a6df (created url path and customer model)
-=======
-    path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
-    path(r'allcustomer/listcards/',ListCards.as_view())
->>>>>>> 4385bf9 (created the url patterns for customer views.py)
+
 ]
