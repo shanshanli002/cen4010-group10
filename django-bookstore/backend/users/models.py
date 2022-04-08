@@ -12,6 +12,7 @@ class Users(models.Model):
  
 =======
 
+
 class Customer(models.Model):
     user=models.CharField(max_length=200,null=True)
     name=models.CharField(max_length=200,null=True)
@@ -24,5 +25,13 @@ class Customer(models.Model):
     card_info=models.CharField(max_length=200,null=True)
 >>>>>>> 3376cec (created customer model and credit card)
     
-    def __str__(self):
-        return str(self.Customer)
+    def get_user(self):
+        return self.user
+    def get_name(self):
+        return self.name
+    def get_email(self):
+        return self.email
+    def get_password(self):
+        return self.password
+    def get_card_info(self):
+        return self.card_info
