@@ -6,7 +6,11 @@ from .models import *
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
+<<<<<<< HEAD
         fields = ('id','user', 'name', 'email','address','password','card_info')
+=======
+        fields = ('id','user', 'name', 'email','password','card_info')
+>>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
         extra_kwargs = {'password':{'write_only':True}}
 
  

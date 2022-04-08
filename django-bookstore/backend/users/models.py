@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 <<<<<<< HEAD
 #user account     
+<<<<<<< HEAD
 class Users(models.Model):
    username = models.CharField(max_length = 100) 
    password = models.CharField(max_length =20 )  
@@ -12,11 +13,14 @@ class Users(models.Model):
  
 =======
 
+=======
+>>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
 
 class Customer(models.Model):
     user=models.CharField(max_length=200,null=True)
     name=models.CharField(max_length=200,null=True)
     email=models.CharField(max_length=200,null=True)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     date_created=models.DateTimeField(auto_now_add=True,null=True)
@@ -28,6 +32,10 @@ class Customer(models.Model):
     password=models.CharField(max_length=200,null=True)
     card_info=models.CharField(max_length=200,null=True)
 >>>>>>> 3376cec (created customer model and credit card)
+=======
+    password=models.CharField(max_length=200,null=True)
+    card_info=models.CharField(max_length=200,null=True)
+>>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
     
     def get_user(self):
         return self.user
@@ -35,13 +43,20 @@ class Customer(models.Model):
         return self.name
     def get_email(self):
         return self.email
+<<<<<<< HEAD
     def get_address(self):
         return self.address
+=======
+>>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
     def get_password(self):
         return self.password
     def get_card_info(self):
         return self.card_info
+<<<<<<< HEAD
    
         
         
         
+=======
+   
+>>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
