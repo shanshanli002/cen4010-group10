@@ -30,8 +30,6 @@ class CustomerView(APIView):
         return JsonResponse(serializer.data, status= 200, safe=False)
   
   
-
-  
 #update the user information ex: name, email, address
     def put(self,request,pk=None):
         if request.method == 'PUT':
@@ -45,6 +43,19 @@ class CustomerView(APIView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+ 
+ #create a new user in the database
+    def post(self, request, pk=None):
+        params = request.data
+        params['username'] = request.customer.username
+        serializer = CustomerSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        saved_data = self.perform_create(serializer)
+        post = CustomerSerializer(saved_data)
+        return JsonResponse({"success":True, "message":"Customer Added Successfully","data":Customer.data},serializer.data, status = 201,)
+ 
+ 
+ 
  
  
  ##Retrieve a list of cards for that user
@@ -60,6 +71,12 @@ class ListCards(APIView):
               "Visa:  ": "Debit card ending in ...1234"},status=200
               )
             
-       
-        
+def post(self, request, pk=None):
+        params = request.data
+        params['card_info'] = request.customer.card_info
+        serializer = CustomerSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        saved_data = self.perform_create(serializer)
+        post = CustomerSerializer(saved_data)
+        return JsonResponse({"success":True, "message":"Card added Successfully","data":Customer.data},serializer.data, status = 201,)    
       
