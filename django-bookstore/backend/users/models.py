@@ -17,9 +17,10 @@ class Users(models.Model):
 >>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
 
 class Customer(models.Model):
-    user=models.CharField(max_length=200,null=True)
+    username=models.CharField(max_length=200,null=True)
     name=models.CharField(max_length=200,null=True)
     email=models.CharField(max_length=200,null=True)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -33,21 +34,29 @@ class Customer(models.Model):
     card_info=models.CharField(max_length=200,null=True)
 >>>>>>> 3376cec (created customer model and credit card)
 =======
+=======
+    address=models.CharField(max_length=200,null=True)
+>>>>>>> 2186330 (added address to user form)
     password=models.CharField(max_length=200,null=True)
     card_info=models.CharField(max_length=200,null=True)
 >>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
     
     def get_user(self):
-        return self.user
+        return self.username
     def get_name(self):
         return self.name
     def get_email(self):
         return self.email
 <<<<<<< HEAD
+<<<<<<< HEAD
     def get_address(self):
         return self.address
 =======
 >>>>>>> ef66e24 (renamed user to customer to be able to create a credit card)
+=======
+    def get_address(self):
+        return self.address
+>>>>>>> 2186330 (added address to user form)
     def get_password(self):
         return self.password
     def get_card_info(self):
