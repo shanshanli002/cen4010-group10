@@ -20,3 +20,7 @@ class Customer(models.Model):
         return self.password
     def get_card_info(self):
         return self.card_info
+   
+        
+        
+        
