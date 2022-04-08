@@ -54,7 +54,7 @@ class ListCards(APIView):
       if request.method == 'GET':
           serializer = CustomerSerializer(customer, many=True)
           return Response (
-              {"user:":"ChampangePapi",
+              {"username:":"ChampangePapi",
                "name" :"Drake Aubrey",
                "Chase: ": "Debit card ending in ...1234",
               "Visa:  ": "Debit card ending in ...1234"},status=200
