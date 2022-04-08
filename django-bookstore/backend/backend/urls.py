@@ -36,5 +36,4 @@ urlpatterns = [
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view())
-
 ]
