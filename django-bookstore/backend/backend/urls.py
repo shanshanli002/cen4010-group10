@@ -20,7 +20,7 @@ from django.urls import path
 from django.urls import include
 from books import views
 from books.views import book_list, book_detail, author_list, all_books, all_authors
-from users.views import List_All_Customers,Customer_detail
+#from users.views import List_All_Customers
 
 
 
@@ -35,8 +35,12 @@ urlpatterns = [
     path('books/',book_list),
     path('authors/', author_list),
     path('books/<int:ISBN>/', book_detail),
+    path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
+    path(r'allcustomer/listcards/',ListCards.as_view())
+    #path('allcustomer/',List_All_Customers)
     #api views for profile management
-    path('allcustomer/',List_All_Customers),
-    path('customer/<str:name>/',Customer_detail)
+    #path('allcustomer/<str:pk>/',views.List_All_Customers, name="allcustomer"),
+    #path('customer/<int:pk>/',Customer_detail),
+    #path('customer/update/',post)
   
 ]
