@@ -32,6 +32,7 @@ urlpatterns = [
     #api views for book details
     path('api/books/', BooksApi.book_list),
     path('api/authors/', BooksApi.author_list),
+    path('api/books/<int:ISBN>/', BooksApi.book_detail),
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view())
