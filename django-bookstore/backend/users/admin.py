@@ -4,10 +4,11 @@ from .models import *
 # Register your models here.
 
 # model for user admin 
-class UserAdmin(admin.ModelAdmin):
+# Register your models here.
+
+class CustomerAdmin(admin.ModelAdmin):
     #display for admin/users/accounts
-    list_display=('id','username','password','first_name','email')
+    list_display=('id','username','name','email','address','password','card_info')
  
 
-admin.site.register(Users,UserAdmin)
-
+admin.site.register(Customer)

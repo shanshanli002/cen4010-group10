@@ -44,17 +44,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'books',
+
 ]
 
 #Knox’s TokenAuthentication your default authentification class for django-rest-framework
-#REST_FRAMEWORK = {
-#    'DEFAULT_AUTHENTICATION_CLASSES': [
-#        'rest_framework.authentication.BasicAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#        'knox.auth.TokenAuthentication',
-#    ]
-# }
-
+'''
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+         'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
+    ]
+ }
+'''
 
 
 MIDDLEWARE = [

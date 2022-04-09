@@ -11,10 +11,9 @@ class Book(models.Model):
     Book_Description = models.CharField(max_length=10000)
     Genre = models.CharField(max_length=200)
     Publisher = models.CharField(max_length=200)
-    Year_Published = models.IntegerField(max_length=200)
-    Copies_Sold = models.IntegerField(max_length=200)
-    ISBN = models.IntegerField(max_length=200)
-    Author_ID = models.IntegerField(max_length=200, null=TRUE)
+    Year_Published = models.IntegerField()
+    Copies_Sold = models.IntegerField()
+    ISBN = models.IntegerField()
  
 class Author(models.Model):
     First_Name = models.CharField(max_length=200)
