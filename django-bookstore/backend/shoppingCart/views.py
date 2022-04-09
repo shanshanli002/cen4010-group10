@@ -1,15 +1,20 @@
 from webbrowser import get
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework import viewsets
 from rest_framework import request, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
-from users.models import Users
+from users.models import Customer
 from books.models import Book
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from shoppingCart.form import shoppingCartForm
+from shoppingCart.models import Cart
+
+def all_items(request):
+    cartItems = Cart.objects.all()
+    return HttpResponse(cartItems)
 
 @login_required
 @require_POST
