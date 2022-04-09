@@ -9,7 +9,7 @@ class Comment(models.Model):
         related_name="comments"
     )
     book = models.ForeignKey(
-        "Book",
+        Book,
         on_delete=models.CASCADE,
         related_name="comments"
     )
