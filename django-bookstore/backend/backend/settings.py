@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'books',
-
+    'bookRating',
 ]
 
 #Knox’s TokenAuthentication your default authentification class for django-rest-framework
