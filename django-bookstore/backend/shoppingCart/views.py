@@ -21,7 +21,7 @@ def all_items(request):
 def submitCart(request):
     books = list(request.users.shoppingCart.all())
     request.users.books.add(*books)
-    request.users.shoppingCartart.clear()
+    request.users.shoppingCart.clear()
     request.users.save()
 
     for book in books:
