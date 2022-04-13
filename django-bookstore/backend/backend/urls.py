@@ -39,4 +39,5 @@ urlpatterns = [
     path(r'allcustomer/listcards/',ListCards.as_view()),
     path('sorted/', CommentView.comment_Rating),
     path('avg/', CommentView.comment_Average),
+    #path("product/<int:pk>/", views.product_page, name="product_page"),
 ]
