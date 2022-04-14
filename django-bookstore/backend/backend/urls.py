@@ -1,7 +1,7 @@
-"""backend URL Configuration
+"""authsysproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,19 +14,40 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from users.views import *
+from shoppingCart.views import CartView
+from users import views
 from django.urls import path
 from django.urls import include
 from books import views
-from books.views import all_books, all_authors, book_list, author_list, book_detail
+from books.views import BooksRegular, BooksApi
+from bookRating.views import CommentView, Average
+
+
 urlpatterns = [
     #regular views for the django app
-    path('', views.homepage),
+    path('', BooksRegular.homepage),
     path('admin/', admin.site.urls),
     #regular django views for book details 
-    path('books/', all_books),
-    path('authors/', all_authors),
+    path('books/', BooksRegular.all_books),
+    path('authors/', BooksRegular.all_authors),
     #api views for book details
-    path('api/books/', book_list),
-    path('api/authors/', author_list),
-    path('api/books/<int:ISBN>/', book_detail)
+    path('api/books/', BooksApi.book_list),
+    path('api/authors/', BooksApi.author_list),
+    path('api/books/<int:ISBN>/', BooksApi.book_detail),
+    #api views for profile management
+    path(r'allcustomers/',CustomerView.as_view(),kwargs={'pk':None}),
+    path(r'allcustomer/listcards/',ListCards.as_view()),
+    #api views for shopping cart
+    path('allCarts/', CartView.as_view(), kwargs={'pk': None}),
+    path('addCartItem/', CartView.addToCart),
+    path('removeCartItem/<str:user_id>/', CartView.removeFromCart),
+    path('newCart/', CartView.createCart),
+    path(r'allcustomer/<str:username>/',RetrieveUser.as_view()),
+    #api views for book commenting and rating
+    path('sorted/', CommentView.comments),
+    path('newcomment/', CommentView.comments),
+    path('sorted/<int:BookNum>/', CommentView.comments),
+    path('avg/', Average.get_queryset)
+
 ]
