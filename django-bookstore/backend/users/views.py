@@ -57,22 +57,23 @@ class CustomerView(APIView):
                 serializer.save()
                 return JsonResponse(serializer.data, status=201)
             return JsonResponse(serializer.errors, status=400)
+        
  # Must be able to retrieve a User Object and its fields by their username
 class RetrieveUser(APIView):
-    def get_object(self,request,username):  
+    def get_object(request,username):
         try:
-            customer = Customer.objects.get(username = "username")
+            customer = Customer.objects.get(username = username)
+        #if not in database, throw 400 error 
         except Customer.DoesNotExist:
             return HttpResponse(status = 404)
-       
+        
         if request.method == 'GET':
             serializer = CustomerSerializer(customer)
             return JsonResponse(serializer.data, status = 201)
-       
+    
         elif request.method == 'DELETE':
             Customer.objects.filter(username = username).delete()
             return HttpResponse(status=204)
-      
            
 ##Retrieve a list of cards for that user
 class ListCards(APIView):       
