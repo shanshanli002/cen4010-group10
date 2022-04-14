@@ -21,11 +21,7 @@ from django.urls import path
 from django.urls import include
 from books import views
 from books.views import BooksRegular, BooksApi
-<<<<<<< HEAD
-
-=======
 from bookRating.views import CommentView, Average
->>>>>>> master
 
 
 urlpatterns = [
