@@ -36,6 +36,7 @@ urlpatterns = [
     path('api/authors/', BooksApi.author_list),
     path('api/books/<int:ISBN>/', BooksApi.book_detail),
     #api views for profile management
+
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view()),
     #api views for shopping cart
@@ -43,9 +44,11 @@ urlpatterns = [
     path('addCartItem/', CartView.addToCart),
     path('removeCartItem/<str:user_id>/', CartView.removeFromCart),
     path('newCart/', CartView.createCart),
+    path(r'allcustomer/<str:username>/',RetrieveUser.as_view()),
     #api views for book commenting and rating
     path('sorted/', CommentView.comments),
     path('avg/', Average.get_queryset),
     path('newcomment/', CommentView.comments),
     path('sorted/<int:BookNum>/', CommentView.comments)
+
 ]
