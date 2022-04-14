@@ -22,7 +22,7 @@ from django.urls import include
 from books import views
 from books.views import BooksRegular, BooksApi
 from bookRating.views import CommentView, Average
-
+from wishlist.views import WishlistView
 
 urlpatterns = [
     #regular views for the django app
@@ -49,5 +49,6 @@ urlpatterns = [
     path('newcomment/', CommentView.comments),
     path('sorted/<int:BookNum>/', CommentView.comments),
     path('avg/', Average.get_queryset)
+    path('view/', wishlist.WishlistView.get)
 
 ]
