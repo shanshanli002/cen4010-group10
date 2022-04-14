@@ -6,7 +6,7 @@ from django.db.models import Avg
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('author', 'book', 'score', 'title', 'content', 'timestamp')
+        fields = ['author', 'book', 'score', 'title', 'content', 'timestamp']
 
  
 
