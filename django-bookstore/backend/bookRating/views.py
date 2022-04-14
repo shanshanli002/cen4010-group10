@@ -1,56 +1,29 @@
-from django.contrib.auth.decorators import login_required
-
-from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Avg
 from bookRating.models import Comment
 from django.http import HttpResponse
 from django.shortcuts import render
-from books.models import Book
-from bookRating.forms import CommentForm
 
-class CommentView():
+from django.http import HttpResponse, JsonResponse
+from rest_framework.views import APIView
+from bookRating.serializers import CommentSerializer, CommentAverageSerializer
+from rest_framework.mixins import ListModelMixin
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import AllowAny
 
-    def comment_Rating(request):
+class CommentView(APIView):
+
+    # get bookratings by sort highest to lowest 
+    def get(request, pk=None):
+        comment = Comment.objects.all().order_by('-score')
         if request.method == 'GET':
-            sorted = Comment.objects.all()
-            return render(request, "Comment_Rating.html", {'sorted': sorted}) 
-
-    def comment_Average(request):
-        if request.method == 'GET':
-            average = Comment.objects.all().aggregate(Avg('score'))
-            return HttpResponse(average)
+            serializer = CommentSerializer(comment, many=True)
+        return JsonResponse(serializer.data, status= 200, safe=False)
 
 
+class Average(ListModelMixin, GenericAPIView): 
+    serializer_class = CommentAverageSerializer
+    permission_classes = (AllowAny,)
 
-"""
-    def product_page(request, pk):
-        book = get_object_or_404(Book, pk=pk)
+    def get_queryset(self):
 
-        if not request.user.is_authenticated:
-            is_comment_allowed = False
-        else:
-            is_comment_allowed = (
-                not request.user.comments.filter(book__pk=pk).exists()
-                and book in request.user.books.all()
-            )
-        
-        if request.method == "GET" or not is_comment_allowed:
-            return render(
-                request, "product.html",
-                dict(book=book, is_comment_allowed=is_comment_allowed)
-            )
-
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.book = book
-            comment.author = request.user
-            comment.save()
-            if book.score == 0:
-                book.score = comment.score
-            else:
-                book.score = (book.score + comment.score) / 2.0
-            book.save()
-        
-        return redirect("product_page", pk=pk)
-"""
+        return Comment.objects.all().annotate(Avg('score'))

@@ -20,7 +20,7 @@ from django.urls import path
 from django.urls import include
 from books import views
 from books.views import BooksRegular, BooksApi
-from bookRating.views import CommentView
+from bookRating.views import CommentView, Average
 
 
 urlpatterns = [
@@ -37,7 +37,7 @@ urlpatterns = [
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view()),
-    path('sorted/', CommentView.comment_Rating),
-    path('avg/', CommentView.comment_Average),
-    #path("product/<int:pk>/", views.product_page, name="product_page"),
+    path('sorted/', CommentView.get),
+    path('avg/', Average.get_queryset),
+
 ]
