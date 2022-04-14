@@ -1,4 +1,5 @@
 from curses.ascii import HT
+from dataclasses import dataclass
 from unicodedata import name
 from django.shortcuts import render
 from rest_framework.decorators import permission_classes
@@ -18,7 +19,7 @@ class CustomerView(APIView):
      View to list all users in the system.
     """
     permission_classes = (permissions.AllowAny,)
-      
+    
     def get(self, request, pk=None):
         """
         return a list of all users
@@ -29,6 +30,7 @@ class CustomerView(APIView):
                 
         return JsonResponse(serializer.data, status= 200, safe=False)
     
+  # Must be able to retrieve a User Object and its fields by their username   
     def get_object(request,customer_id):
         try:
             customer = Customer.objects.get(id=customer_id)
@@ -46,6 +48,7 @@ class CustomerView(APIView):
         
 # Must be able to update the user and any of their fields except for mail  
 # update the user information ex: name, email, address
+
     def put(self,request,pk=None):
         if request.method == 'PUT':
             customer = Customer.objects.all()
@@ -85,6 +88,7 @@ class RetrieveUser(APIView):
         "email": "CertifiedLoverBoy@gmail.com",
         "address": "123 Main St",
         "card_info": "3232323232323232"},status=200)
+ 
            
 ##Retrieve a list of cards for that user
 class ListCards(APIView):       
