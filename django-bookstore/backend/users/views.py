@@ -28,7 +28,23 @@ class CustomerView(APIView):
             serializer = CustomerSerializer(customer, many=True)
         
         return JsonResponse(serializer.data, status= 200, safe=False)
-  
+    
+# Must be able to retrieve a User Object and its fields by their username
+    def get_object(self,request,username):
+        try:
+            customer = Customer.objects.filter(username = ["username"])
+        except Customer.DoesNotExist:
+            return HttpResponse(status = 404)
+       
+        if request.method == 'GET':
+            serializer = CustomerSerializer(customer)
+            return JsonResponse(serializer.data, status = 201)
+       
+        elif request.method == 'DELETE':
+            Customer.objects.filter(username = username).delete()
+            return HttpResponse(status=204)
+        
+        
 # Must be able to update the user and any of their fields except for mail  
 # update the user information ex: name, email, address
     def put(self,request,pk=None):
