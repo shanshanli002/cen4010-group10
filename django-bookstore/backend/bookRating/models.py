@@ -11,7 +11,3 @@ class Comment(models.Model):
     content = models.CharField(max_length=900)
     timestamp = models.DateField(auto_now_add=True)
 
-#    def average_rating(self):
-#        if hasattr(self, '_average_rating'):
-#            return self._average_rating
-#        return self.Comment.aggregate(Avg('score'))
