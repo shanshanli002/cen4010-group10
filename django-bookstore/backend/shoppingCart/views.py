@@ -54,6 +54,6 @@ class CartView(APIView):
     def removeFromCart(request, user_id):
         if request.method == 'DELETE':
             Cart.objects.filter(user_id=user_id).delete()
-            return HttpResponse(staus = 204)
+            return HttpResponse(status = 204)
             
     
