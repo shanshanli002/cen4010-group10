@@ -42,5 +42,10 @@ urlpatterns = [
     path('allCarts/', CartView.as_view(), kwargs={'pk': None}),
     path('addCartItem/', CartView.addToCart),
     path('removeCartItem/<str:user_id>/', CartView.removeFromCart),
-    path('newCart/', CartView.createCart)
+    path('newCart/', CartView.createCart),
+    #api views for book commenting and rating
+    path('sorted/', CommentView.comments),
+    path('avg/', Average.get_queryset),
+    path('newcomment/', CommentView.comments),
+    path('sorted/<int:BookNum>/', CommentView.comments)
 ]
