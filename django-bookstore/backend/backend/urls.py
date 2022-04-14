@@ -23,6 +23,7 @@ from books import views
 from books.views import BooksRegular, BooksApi
 
 
+
 urlpatterns = [
     #regular views for the django app
     path('', BooksRegular.homepage),
@@ -37,8 +38,9 @@ urlpatterns = [
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view()),
-    path('showItems/', CartView.as_view(), kwargs={'pk': None}),
-    path('addItem/', CartView.addToCart),
-    path('removeItem/', CartView.removeFromCart),
-    path('createdCart/', CartView.createCart),
+    #api views for shopping cart
+    path('allCarts/', CartView.as_view(), kwargs={'pk': None}),
+    path('addCartItem/', CartView.addToCart),
+    path('removeCartItem/<str:user_id>/', CartView.removeFromCart),
+    path('newCart/', CartView.createCart)
 ]
