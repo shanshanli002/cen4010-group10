@@ -7,13 +7,10 @@ from wishlist.models import wishlistenitity
 from wishlist.serializers import WishlistSerializer
 from rest_framework.views import APIView
 
-class WishlistView(APIView):
-
+class WishlistView():
     # view Wishlist
-    def get(request, pk=None):
-        ViewWishlist = wishlistenitity.objects.all()
+    def getWishList(request, pk=None):
         if request.method == 'GET':
-            #serializer = WishlistSerializer(ViewWishlist, many=True)
-            return HttpResponse(ViewWishlist, status= 200)
-        else: 
-            return HttpResponse(ViewWishlist, status= 400)
+            wishlistobjects = wishlistenitity.objects.all()
+            serializer = WishlistSerializer(wishlistobjects, many=True)
+            return JsonResponse(serializer.data, safe=False)
