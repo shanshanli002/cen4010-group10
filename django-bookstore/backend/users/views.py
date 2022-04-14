@@ -88,7 +88,6 @@ class RetrieveUser(APIView):
         "email": "CertifiedLoverBoy@gmail.com",
         "address": "123 Main St",
         "card_info": "3232323232323232"},status=200)
- 
            
 ##Retrieve a list of cards for that user
 class ListCards(APIView):       
