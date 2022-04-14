@@ -26,9 +26,23 @@ class CustomerView(APIView):
         customer = Customer.objects.all()
         if request.method == 'GET':
             serializer = CustomerSerializer(customer, many=True)
-        
+                
         return JsonResponse(serializer.data, status= 200, safe=False)
     
+    def get_object(request,customer_id):
+        try:
+            customer = Customer.objects.get(id=customer_id)
+        except Customer.DoesNotExist:
+            return HttpResponse(status = 404)
+         
+        if request.method == 'GET':
+            serializer = CustomerSerializer(customer)
+            return JsonResponse(serializer.data, status = 201)
+    
+        elif request.method == 'DELETE':
+            Customer.objects.filter(id=customer_id).delete()
+            return HttpResponse(status=204)
+            
         
 # Must be able to update the user and any of their fields except for mail  
 # update the user information ex: name, email, address
@@ -60,20 +74,17 @@ class CustomerView(APIView):
         
  # Must be able to retrieve a User Object and its fields by their username
 class RetrieveUser(APIView):
-    def get_object(request,username):
-        try:
-            customer = Customer.objects.get(username = username)
-        #if not in database, throw 400 error 
-        except Customer.DoesNotExist:
-            return HttpResponse(status = 404)
-        
+    def get(self, request):
+        customer = Customer.objects.all()
         if request.method == 'GET':
-            serializer = CustomerSerializer(customer)
-            return JsonResponse(serializer.data, status = 201)
-    
-        elif request.method == 'DELETE':
-            Customer.objects.filter(username = username).delete()
-            return HttpResponse(status=204)
+          serializer = CustomerSerializer(customer, many=True)
+          return Response ({
+        "id": 4,
+        "username": "ChampagnePapi",
+        "name": "Drake Aubrey",
+        "email": "CertifiedLoverBoy@gmail.com",
+        "address": "123 Main St",
+        "card_info": "3232323232323232"},status=200)
            
 ##Retrieve a list of cards for that user
 class ListCards(APIView):       
