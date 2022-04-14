@@ -7,6 +7,3 @@ from users.models import Customer
 class Cart(models.Model):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE) 
     item = models.ForeignKey(Book, on_delete=models.CASCADE)
-
-    #def __str__(self):
-        #return str(self)

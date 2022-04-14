@@ -1,64 +1,59 @@
+from urllib import response
 from webbrowser import get
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template import RequestContext
 from rest_framework import viewsets
-from rest_framework import request, generics
+from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from users.models import Customer
 from books.models import Book
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from shoppingCart.form import shoppingCartForm
 from shoppingCart.models import Cart
+from rest_framework.views import APIView
+from .serializers import cartSerializer
+from rest_framework.decorators import permission_classes
+from rest_framework import permissions
+from django.views.decorators.csrf import csrf_exempt
+from books.models import Book
 
-def all_items(request):
-    cartItems = Cart.objects.all()
-    return HttpResponse(cartItems)
+class CartView(APIView):
 
-@login_required
-@require_POST
-def submitCart(request):
-    books = list(request.users.shoppingCart.all())
-    request.users.books.add(*books)
-    request.users.shoppingCart.clear()
-    request.users.save()
+    @csrf_exempt
+    def get(self, request, pk = None):
+        cart = Cart.objects.all()
+        if request.method == 'GET':
+            serializer = cartSerializer(cart, many = True)
+        return JsonResponse(serializer.data, status = 200, safe = False)
 
-    for book in books:
-        book.holders_count += 1
-        book.save()
+    
+    def createCart(request):
+        if  request.method == 'POST':
+            data = JSONParser().parse(request)
+            serializer = cartSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, safe = False , status=201)
+            return JsonResponse(serializer.errors, status=400)
 
-    return redirect("shoppingCart")
-
-@login_required
-@require_POST
-def addToCart(request):
-    form = shoppingCartForm(request.POST)
-    if not form.is_valid():
-        return redirect("/")
-    book_pk = form.cleaned_data.get("book_pk")
-    try:
-        book = Book.objects.get(pk=book_pk)
-    except Book.DoesNotExist:
-        return redirect("/")
-
-    request.users.shoppingCart.add(book)
-    request.users.save()
-    return redirect(form.cleaned_data.get("next_link"))
-
-@login_required
-@require_POST
-def removeFromCart(request):
-    form = shoppingCartForm(request.POST)
-    if not form.is_valid():
-        return redirect("/")
-    book_pk = form.cleaned_data.get("book_pk")
-    try:
-        book = Book.objects.get(pk=book_pk)
-    except Book.DoesNotExist:
-        return redirect("/")
-
-    request.users.shoppingCart.remove(book)
-    request.users.save()
-    return redirect(form.cleaned_data.get("next_link"))
-       
+    
+    @csrf_exempt
+    def addToCart(request, pk = None):
+        if request.method == 'GET':
+            cart = Cart.objects.all()
+            serializer = cartSerializer(cart, data=request.data)
+            if serializer.is_valid():
+                serializer.save
+                return JsonResponse(serializer.data, status = 201)
+            return JsonResponse(serializer.errors, status = 400)
+    
+    @csrf_exempt
+    def removeFromCart(request, Book):
+        if request.method == 'DELETE':
+            Cart.objects.filter(Book = Book).delete()
+            return HttpResponse(staus = 204)
+            
+    

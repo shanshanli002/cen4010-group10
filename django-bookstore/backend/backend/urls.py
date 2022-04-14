@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from users.views import *
-from shoppingCart.views import addToCart, removeFromCart, submitCart, all_items
+from shoppingCart.views import CartView
 from users import views
 from django.urls import path
 from django.urls import include
@@ -37,5 +37,8 @@ urlpatterns = [
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view()),
-    path('showItems/', all_items),
+    path('showItems/', CartView.as_view(), kwargs={'pk': None}),
+    path('addItem/', CartView.addToCart),
+    path('removeItem/', CartView.removeFromCart),
+    path('createdCart/', CartView.createCart),
 ]
