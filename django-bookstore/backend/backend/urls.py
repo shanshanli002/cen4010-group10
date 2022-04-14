@@ -49,6 +49,6 @@ urlpatterns = [
     path('newcomment/', CommentView.comments),
     path('sorted/<int:BookNum>/', CommentView.comments),
     path('avg/', Average.get_queryset),
-    path('view/', WishlistView.get)
-
+    #api views for wishlist
+    path('viewwishlists/', WishlistView.getWishList)
 ]
