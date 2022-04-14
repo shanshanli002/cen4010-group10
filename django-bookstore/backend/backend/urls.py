@@ -21,10 +21,10 @@ from django.urls import path
 from django.urls import include
 from books import views
 from bookSorting import views
-from bookSorting.views import all_books, all_authors, all_genres, all_ratings, all_top_sellers, all_book_list, book_list, author_list, book_detail, book_list_top_sellers
 from books.views import BooksRegular, BooksApi
 from bookRating.views import CommentView, Average
 from wishlist.views import WishlistView
+from bookSorting.views import BookSortingGenreApi, BookSortingTopSellersApi, BookSortingRatingApi, BookSorting, ApiListView
 
 urlpatterns = [
     #regular views for the django app
@@ -55,5 +55,9 @@ urlpatterns = [
     path('viewwishlist/', WishlistView.getWishList),
     path('removewishlist/<int:id>/',WishlistView.removefromwishlist),
     path('createwishlist/', WishlistView.createwishlist),
-
+    #api views for book sorting
+    path('api/genre/', BookSortingGenreApi.book_list),
+    path('api/topsellers/', BookSortingTopSellersApi.book_list),
+    path('api/rating/', BookSortingRatingApi.book_list),
+    path('list/', ApiListView.as_view())
 ]

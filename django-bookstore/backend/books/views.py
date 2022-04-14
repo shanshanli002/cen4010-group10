@@ -7,7 +7,6 @@ from .serializers import BookSerializer
 from .serializers import AuthorSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
-from .models import Book
 
 class BooksRegular():
     """regular django views to view all books and all authors include methods: all_books and all_authors"""
@@ -23,29 +22,6 @@ class BooksRegular():
         authors = Author.objects.all()
         return render(request, "Author_Books.html", {'authors': authors}) 
 
-def all_book_list(request):
-    """client view to search for books associated with a specific genre"""
-    books = Book.objects.all()
-    return render(request, "Book_List.html", {'books': books})
-
-def all_genres(request):
-    """client view to search for books associated with a specific genre"""
-    Genre = Book.objects.all().order_by('Genre')
-    return render(request, "Book_Genres.html", {'books': Genre})
-
-def all_ratings(request):
-    """client view to search for books associated with a specific genre"""
-    Rating = Book.objects.all().order_by('Rating')
-    return render(request, "Book_Ratings.html", {'books': Rating})
-
-def all_top_sellers(request):
-    """client view to search for books associated with a specific genre"""
-    Copies_Sold = Book.objects.all().order_by('-Copies_Sold')
-    return render(request, "Book_Top_Sellers.html", {'books': Copies_Sold})
-
-#view for launching django app's home page
-def homepage(request):
-    return HttpResponse(f"Welcome to CEN4010 Group 10's Bookstore")
     #view for launching django app's home page
     def homepage(request):
         #return HttpResponse(f"Welcome to CEN4010 Group 10's Bookstore")

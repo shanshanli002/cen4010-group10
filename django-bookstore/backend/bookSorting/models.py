@@ -1,10 +1,12 @@
 from django.db import models
+from books.models import Book
+from bookRating.models import Comment
+from users.models import Customer
+from django.db.models import Avg
+from pickle import FALSE, TRUE
 from django.contrib.auth.models import User
-from django.db import models
 
-
-# Create your models here.
-class Book(models.Model):
+class Sorting(models.Model):
     Title = models.CharField(max_length=200)
     Author = models.CharField(max_length=200)
     Price = models.FloatField()
@@ -13,12 +15,5 @@ class Book(models.Model):
     Publisher = models.CharField(max_length=200)
     Year_Published = models.IntegerField()
     Copies_Sold = models.IntegerField()
+    score = models.IntegerField(choices=((1,"*"),(2, "**"), (3, "***"), (4, "****"), (5, "*****")))
     ISBN = models.IntegerField()
-    #Ratings = models.IntegerField()
- 
-class Author(models.Model):
-    First_Name = models.CharField(max_length=200)
-    Last_Name = models.CharField(max_length=200)
-    Bio = models.CharField(max_length=10000)
-    Publisher = models.CharField(max_length=200)
-    

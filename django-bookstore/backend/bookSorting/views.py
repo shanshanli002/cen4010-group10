@@ -1,129 +1,108 @@
-from curses.ascii import HT
+from django.db.models import Avg
+from django.forms import CharField
+from bookSorting.models import Sorting
+from books.models import Book
+from bookRating.models import Comment
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from rest_framework.views import APIView
+from bookSorting.serializers import BookSortingSerializer, BookSortingRatingSerializer
+from rest_framework.mixins import ListModelMixin
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.parsers import JSONParser
-from books.models import Book, Author
-from .serializers import BookSerializer
-from .serializers import AuthorSerializer
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics
-from .models import Book
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
-
-"""regular django views to view all books and all authors include methods: all_books and all_authors"""
-def all_books(request):
-    """client view to search for book to view book details do not need model"""
-   #without template ------     return HttpResponse("<h1> Hello World </h1>")
-    # var books = use name of model to retrieve from DB
-    books = Book.objects.all()
-    return render (request, "ISBN_Search.html", {'books': books})
-
-def all_authors(request):
-    """client view to search for books associated with a specific author do not need model"""
-    authors = Author.objects.all()
-    return render(request, "Author_Books.html", {'authors': authors}) 
-
-def all_book_list(request):
-    """client view to search for books associated with a specific genre"""
-    Book_List = Book.objects.all()
-    return render(request, "Book_List.html", {'books': Book_List})
-
-def all_genres(request):
-    """client view to search for books associated with a specific genre"""
-    Genre = Book.objects.all().order_by('Genre')
-    return render(request, "Book_Genres.html", {'books': Genre})
-
-def all_ratings(request):
-    """client view to search for books associated with a specific genre"""
-    Rating = Book.objects.all().order_by('Rating')
-    return render(request, "Book_Ratings.html", {'books': Rating})
-
-def all_top_sellers(request):
-    """client view to search for books associated with a specific genre"""
-    Copies_Sold = Book.objects.all().order_by('-Copies_Sold')
-    return render(request, "Book_Top_Sellers.html", {'books': Copies_Sold})
-
-#view for launching django app's home page
-def homepage(request):
-    return HttpResponse(f"Welcome to CEN4010 Group 10's Bookstore")
-
-"""api views inlcude method: book_list, author_list, """
-#csrf allows for post without auth
-@csrf_exempt
-def book_list(request):
-    #returns all the books from db
-    if request.method == 'GET':
-        books = Book.objects.all()
-        author_name = request.GET.get('Author')
-        serializer = BookSerializer(books, many=True)
-        #validate there was a query param 
-        if author_name is not None:
-            #validate the author name
-            print(author_name)
-            #chose to filter based on author name string vs author id because it's faster
-            books = books.filter(Author=author_name)
-            serializer = BookSerializer(books, many=True)
+class BookSortingGenreApi(APIView):
+    @csrf_exempt
+    # get bookratings by sort highest to lowest 
+    def book_list(request):
+        #returns all the books from db
+        if request.method == 'GET':
+            books = Book.objects.all()
+            genre_name = request.GET.get('Genre')
+            serializer = BookSortingSerializer(books, many=True)
+            #validate there was a query param 
+            if genre_name is not None:
+                #validate the genre name
+                print(genre_name)
+                #chose to filter based on author name string vs genre because it's faster
+                books = books.filter(Genre=genre_name)
+                serializer = BookSortingSerializer(books, many=True)
         
-        return JsonResponse(serializer.data, safe=False)
-    
-    #add new book in the db
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = BookSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse(serializer.data, safe=False)
 
-@csrf_exempt
-def book_detail(request, ISBN):
-    #check if the book with the given isbn is in the database
-    try:
-        book = Book.objects.get(ISBN = ISBN)
-    #if not in database, throw 400 error 
-    except Book.DoesNotExist:
-        return HttpResponse(status = 404)
-    #if book exists with the given ISBN and is a get method, return that book object which is the book variable
-    if request.method == 'GET':
-        serializer = BookSerializer(book)
-        return JsonResponse(serializer.data, status = 201)
-    #delete method will delete the book with a specific isbn
-    elif request.method == 'DELETE':
-        Book.objects.filter(ISBN = ISBN).delete()
-        return HttpResponse(status=204)
+        elif request.method == 'POST':
+            data = JSONParser().parse(request)
+            serializer = BookSortingSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=201)
+            return JsonResponse(serializer.errors, status=400)
 
-@csrf_exempt
-def author_list(request):
-    if request.method == 'GET':
-        authors = Author.objects.all()
-        serializer = AuthorSerializer(authors, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    #saving author json object to the db
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = AuthorSerializer(data=data)
+class BookSortingTopSellersApi(APIView):
+    @csrf_exempt
+    # get bookratings by sort highest to lowest 
+    def book_list(request, pk=None):
+        sort = Book.objects.all().order_by('-Copies_Sold')[:10]
+        if request.method == 'GET':
+            serializer = BookSortingSerializer(sort, many=True)
+            return JsonResponse(serializer.data, status= 200, safe=False)
 
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status = 201)
-        
-        return JsonResponse(serializer.errors, status = 400)
+        elif request.method == 'POST':
+            data = JSONParser().parse(request)
+            serializer = BookSortingSerializer(data=data)
+            #check if all fields are present
+            if serializer.is_valid():
+                #save the object to the db
+                serializer.save()
+                #display the new book comment, rating, and timestamp to the user
+                return JsonResponse(serializer.data, status = 201)
 
-@csrf_exempt
-def book_list_top_sellers(request):
-    #returns all the books from db
-    if request.method == 'GET':
-        books = Book.objects.all()
-        author_name = request.GET.get('Author')
-        serializer = BookSerializer(books, many=True)
-        #validate there was a query param 
-        if author_name is not None:
-            #validate the author name
-            print(author_name)
-            #chose to filter based on author name string vs author id because it's faster
-            books = books.filter(Author=author_name)
-            serializer = BookSerializer(books, many=True)
-        
-        return JsonResponse(serializer.data, safe=False)
+class BookSortingRatingApi(APIView):
+    @csrf_exempt
+    # get bookratings by sort highest to lowest 
+    def book_list(request, pk=None):
+        sort = Comment.objects.all().order_by('-score')
+        if request.method == 'GET':
+            serializer = BookSortingRatingSerializer(sort, many=True)
+            return JsonResponse(serializer.data, status= 200, safe=False)
+
+        elif request.method == 'POST':
+            data = JSONParser().parse(request)
+            serializer = BookSortingRatingSerializer(data=data)
+            #check if all fields are present
+            if serializer.is_valid():
+                #save the object to the db
+                serializer.save()
+                #display the new book comment, rating, and timestamp to the user
+                return JsonResponse(serializer.data, status = 201)
+
+class BookSorting():
+    @csrf_exempt
+    def all_genres(request):
+        """client view to search for books associated with a specific genre"""
+        Genre = Sorting.objects.all().order_by('Genre')
+        return render(request, "Book_Genres.html", {'books': Genre})
+
+    def all_ratings(request):
+        """client view to search for books associated with a specific genre"""
+        Rating = Sorting.objects.all().order_by('Rating')
+        return render(request, "Book_Ratings.html", {'books': Rating})
+
+    def all_top_sellers(request):
+        """client view to search for books associated with a specific genre"""
+        Copies_Sold = Sorting.objects.all().order_by('-Copies_Sold')
+        return render(request, "Book_Top_Sellers.html", {'books': Copies_Sold})
+
+class ApiListView(ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSortingSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    pagination_class = PageNumberPagination
