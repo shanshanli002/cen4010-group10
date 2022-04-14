@@ -50,5 +50,8 @@ urlpatterns = [
     path('sorted/<int:BookNum>/', CommentView.comments),
     path('avg/', Average.get_queryset),
     #api views for wishlist
-    path('viewwishlists/', WishlistView.getWishList)
+    path('viewwishlist/', WishlistView.getWishList),
+    path('removewishlist/<int:id>/',WishlistView.removefromwishlist),
+    path('createwishlist/', WishlistView.createwishlist),
+
 ]
