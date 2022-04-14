@@ -37,7 +37,10 @@ urlpatterns = [
     #api views for profile management
     path(r'allcustomer/',CustomerView.as_view(),kwargs={'pk':None}),
     path(r'allcustomer/listcards/',ListCards.as_view()),
-    path('sorted/', CommentView.get),
+    #api views for book commenting and rating
+    path('sorted/', CommentView.comments),
     path('avg/', Average.get_queryset),
+    path('newcomment/', CommentView.comments),
+    path('sorted/<int:BookNum>/', CommentView.comments),
 
 ]

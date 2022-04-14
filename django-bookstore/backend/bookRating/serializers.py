@@ -9,10 +9,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ('author', 'book', 'score', 'title', 'content', 'timestamp')
 
  
-    def create(self, validated_data):
-        comments = Comment.objects.create_comment(validated_data['score'], validated_data['author'], validated_data['book'])
-
-        return comments
 
 class CommentAverageSerializer(serializers.ModelSerializer):
     class Meta:
