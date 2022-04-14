@@ -5,7 +5,7 @@ from books.models import Author
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Book
-        fields = ['Title', 'Author', 'Price', 'Book_Description', 'Genre', 'Publisher', 'Year_Published', 'Copies_Sold', 'ISBN']
+        fields = ['Title', 'Author', 'Price', 'Book_Description', 'Genre', 'Publisher', 'Year_Published', 'Copies_Sold', 'Rating', 'ISBN']
     
 #condensed serializer compared to serializers.serializers, don't have to explicitly list all fields details, create, or update methods
 #uses hyperlinks instead of primary keys

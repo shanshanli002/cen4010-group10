@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from books import views
-from books.views import all_books, all_authors, all_genres, all_ratings, all_top_sellers, all_book_list, book_list, author_list, book_detail
+from bookSorting import views
+from bookSorting.views import all_books, all_authors, all_genres, all_ratings, all_top_sellers, all_book_list, book_list, author_list, book_detail, book_list_top_sellers
+
 urlpatterns = [
     #regular views for the django app
     path('', views.homepage),
@@ -25,12 +27,13 @@ urlpatterns = [
     #regular django views for book details 
     path('books/', all_books),
     path('authors/', all_authors),
-    path('genres', all_genres),
-    path('ratings', all_ratings),
-    path('topsellers', all_top_sellers),
-    path('booklist', all_book_list),
+    path('genres/', all_genres),
+    path('ratings/', all_ratings),
+    path('topsellers/', all_top_sellers),
+    path('booklist/', all_book_list),
     #api views for book details
     path('api/books/', book_list),
     path('api/authors/', author_list),
-    path('api/books/<int:ISBN>/', book_detail)
+    path('api/books/<int:ISBN>/', book_detail),
+    path('api/books/top_sellers/', book_list_top_sellers)
 ]

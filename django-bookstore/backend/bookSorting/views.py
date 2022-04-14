@@ -8,6 +8,8 @@ from .serializers import AuthorSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from .models import Book
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.generics import ListAPIView
 
 
 """regular django views to view all books and all authors include methods: all_books and all_authors"""
@@ -108,3 +110,20 @@ def author_list(request):
             return JsonResponse(serializer.data, status = 201)
         
         return JsonResponse(serializer.errors, status = 400)
+
+@csrf_exempt
+def book_list_top_sellers(request):
+    #returns all the books from db
+    if request.method == 'GET':
+        books = Book.objects.all()
+        author_name = request.GET.get('Author')
+        serializer = BookSerializer(books, many=True)
+        #validate there was a query param 
+        if author_name is not None:
+            #validate the author name
+            print(author_name)
+            #chose to filter based on author name string vs author id because it's faster
+            books = books.filter(Author=author_name)
+            serializer = BookSerializer(books, many=True)
+        
+        return JsonResponse(serializer.data, safe=False)
