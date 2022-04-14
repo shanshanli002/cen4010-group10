@@ -1,0 +1,124 @@
+{% extends "market/base_header_with_search.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-3">
+		<img src="{{ book.cover.url }}" class="img-fluid">
+	</div>
+	<div class="col-md-9">
+		<h2>{{ book.title }}</h2>
+		<p>
+		Автор: 
+		{% for author in book.authors.all %}
+		{{ author.name }}
+		{% if not forloop.last %}, {% endif %}
+		{% endfor %}
+		</p>
+		<p>Год: {{ book.printed_year }}</p>
+		<p>
+			<span>Рейтинг:</span>
+			{% if book.score < 0.5 %}
+			☆☆☆☆☆
+			{% elif book.score >= 0.5 and book.score < 1.5 %}
+			★☆☆☆☆
+			{% elif book.score >= 1.5 and book.score < 2.5 %}
+			★★☆☆☆
+			{% elif book.score >= 2.5 and book.score < 3.5 %}
+			★★★☆☆
+			{% elif book.score >= 3.5 and book.score < 4.5 %}
+			★★★★☆
+			{% else %}
+			★★★★★
+			{% endif %}
+		</p>
+		{% if user.is_authenticated %}
+		<p>Цена: <span class="font-weight-bold">{{ book.price }}₽</span></p>
+		{% endif %}
+		<div>
+			{% if user.is_authenticated %}
+			{% if book in user.shopping_cart.all %}
+			<form method="post" style="display:inline" action="{% url 'shopping_cart_remove' %}">
+					{% csrf_token %}
+					<input type="hidden" name="next_link" value="{{ request.path }}">
+					<input type="hidden" name="book_pk" value="{{ book.pk }}">
+					<button class="btn btn-success" type="submit">
+						Выложить из корзины
+					</button>
+			</form>
+			{% else %}
+			<form method="post" style="display:inline" action="{% url 'shopping_cart_add' %}">
+					{% csrf_token %}
+					<input type="hidden" name="next_link" value="{{ request.path }}">
+					<input type="hidden" name="book_pk" value="{{ book.pk }}">
+					<button class="btn btn-success" type="submit">
+						Добавить в корзину
+					</button>
+				</form>
+			{% endif %}
+			{% if is_comment_allowed %}
+			<button class="btn" onclick="$('#review-form').toggle();">Добавить отзыв</button>
+			{% endif %}
+			{% else %}
+			<a href="{% url 'login' %}" role="button" class="btn btn-success">Купить за {{ book.price }}₽</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="row my-5" id="review-form" style="display:none">
+	<div class="col-12">
+		<h3>Оставьте свой отзыв:</h3>
+		<div></div>
+		<form class="w-50" method="post">
+			{% csrf_token %}
+			{% comment %} <input type="hidden" name="book_pk" value="{{ book.pk }}"> {% endcomment %}
+			<label for="stars_count">Оцените книгу</label>
+			<select id="stars_count" name="score">
+				<option value="1">★☆☆☆☆</option>
+				<option value="2">★★☆☆☆</option>
+				<option value="3">★★★☆☆</option>
+				<option value="4">★★★★☆</option>
+				<option value="5">★★★★★</option>
+			</select>
+			<input type="text" class="form-control my-2" id="title" name="title" placeholder="Заголовок отзыва">
+			<textarea class="form-control my-2" id="review" name="content" placeholder="Текст отзыва"></textarea>
+			<button type="submit" class="btn btn-primary my-2">Сохранить отзыв</button>
+		</form>
+	</div>
+</div>
+<div class="row mt-5">
+	<div>
+		<h3>Отзывы:</h2>
+	</div>
+</div>
+{% for review in book.comments.all %}
+<div class="row mt-3 border-bottom">
+	<div class="col-3">
+		<p class="text-primary">
+			{% if review.score < 0.5 %}
+			☆☆☆☆☆
+			{% elif review.score >= 0.5 and review.score < 1.5 %}
+			★☆☆☆☆
+			{% elif review.score >= 1.5 and review.score < 2.5 %}
+			★★☆☆☆
+			{% elif review.score >= 2.5 and review.score < 3.5 %}
+			★★★☆☆
+			{% elif review.score >= 3.5 and review.score < 4.5 %}
+			★★★★☆
+			{% else %}
+			★★★★★
+			{% endif %}
+		</p>
+		<p>{{ review.author.first_name }} {{ review.author.last_name }}</p>
+	</div>
+	<div class="col-9">
+		<h5>{{ review.title }}</h5>
+		<p>{{ review.content }}</p>
+	</div>
+</div>
+{% empty %}
+<div class="row">
+	<p>Пока еще никто не оставил отзыва к этой книге</p>
+</div>
+{% endfor %}
+{% endblock %}

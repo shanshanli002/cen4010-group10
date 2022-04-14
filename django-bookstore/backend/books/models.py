@@ -1,7 +1,7 @@
+from pickle import FALSE, TRUE
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import models
-
 
 # Create your models here.
 class Book(models.Model):
@@ -21,4 +21,3 @@ class Author(models.Model):
     Last_Name = models.CharField(max_length=200)
     Bio = models.CharField(max_length=10000)
     Publisher = models.CharField(max_length=200)
-    
